@@ -2,15 +2,18 @@
 
 namespace BT.Api.Controllers
 {
-    [ApiController]
-    [Route("/api/[controller]")]
-    public class HomeController : ControllerBase
+    [ApiVersion("1.0")]
+    public class HomeController : ApiBaseController
     {
         public HomeController()
         {
-    
+
         }
 
+        /// <summary>
+        /// Check server
+        /// </summary>
+        /// <returns>String with text information about working server</returns>
         [HttpGet]
         public string Get()
         {
