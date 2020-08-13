@@ -36,10 +36,6 @@ namespace BT.Infrastructure.Config
                 });
                 x.OperationFilter<RemoveVersionFromParameter>();
                 x.DocumentFilter<ReplaceVersionWithExactValueInPath>();
-
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                x.IncludeXmlComments(xmlPath);
             });
         }
 
