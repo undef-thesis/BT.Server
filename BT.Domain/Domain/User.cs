@@ -9,13 +9,13 @@ namespace BT.Domain.Domain
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
         public string Password { get; private set; }
-        public string Salt { get; private set; }
+        public byte[] Salt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
         protected User() {}
         
-        public User(string email, string firstName, string lastName, string password, string salt)
+        public User(string email, string firstName, string lastName, string password, byte[] salt)
         {
             Id = Guid.NewGuid();
             Email = email;
