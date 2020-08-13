@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatR;
+using BT.Application.Services.Auth;
+using BT.Api.Middlewares;
 
 namespace BT.Api
 {
@@ -23,6 +25,9 @@ namespace BT.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAuthTokenService, AuthTokenService>();
+            services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<IAuthTokenCache, AuthTokenCache>();
             services.AddScoped<IDataContext, DataContext>();
 
             services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
@@ -30,8 +35,11 @@ namespace BT.Api
             var assembly = AppDomain.CurrentDomain.Load("BT.Application");
             services.AddMediatR(assembly);
 
+            services.AddJwt();
             services.AddSwagger();
             services.AddVersioning();
+
+            services.AddMemoryCache();
 
             services.AddControllers();
         }
@@ -45,9 +53,13 @@ namespace BT.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.ConfigSwagger();
+
+            app.UseMiddleware<AuthMiddleware>();
 
             app.UseExceptionHandler("/error");
             app.UseEndpoints(endpoints =>
