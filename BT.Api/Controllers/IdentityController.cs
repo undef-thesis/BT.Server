@@ -1,9 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BT.Application.Features.AuthFeatures.Commands;
 using BT.Application.Services.Auth;
+using BT.Application.Features.TokenFeatures;
 
 namespace BT.Api.Controllers
 {
@@ -42,12 +42,43 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginCommand command)
         {
-            command.TokenId = Guid.NewGuid();
             await Mediator.Send(command);
 
-            var token = _authTokensCache.Get(command.TokenId);
+            var token = _authTokensCache.Get(command.Email);
 
             return Ok(token);
+        }
+
+        /// <summary>
+        /// Refresh user token
+        /// </summary>
+        /// <param name="command">RefreshTokenCommand</param> 
+        /// <returns>Return new token</returns>
+        [HttpPost]
+        [Route("refresh-token")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand command)
+        {
+            var token = await Mediator.Send(command);
+
+           // var token = _authTokensCache.Get(command.TokenId);
+
+            return Ok(token);
+        }
+
+        /// <summary>
+        /// Revoke refresh user token
+        /// </summary>
+        /// <param name="command">RevokeTokenCommand</param> 
+        /// <returns>Revoke refresh token</returns>
+        [HttpPost]
+        [Route("revoke-token")]
+        [Authorize]
+        public async Task<IActionResult> RevokeToken([FromBody]RevokeTokenCommand command)
+        {
+            await Mediator.Send(command);
+
+            return Ok();
         }
     }
 }

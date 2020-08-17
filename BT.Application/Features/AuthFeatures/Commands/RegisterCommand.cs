@@ -1,4 +1,3 @@
-
 using MediatR;
 
 namespace BT.Application.Features.AuthFeatures.Commands

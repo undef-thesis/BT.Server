@@ -5,7 +5,7 @@ using BT.Domain.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using BT.Application.Services.Auth;
-using System;
+using BT.Application.Exceptions;
 
 namespace BT.Application.Features.AuthFeatures.Commands
 {
@@ -26,12 +26,7 @@ namespace BT.Application.Features.AuthFeatures.Commands
 
             if(checkUser is object)
             {
-                throw new Exception("User already exists");
-            }
-
-            if(command.Password != command.ConfirmPassword)
-            {
-                throw new Exception("Passwords are not equal");
+                throw new UserAlreadyExistsException(command.Email);
             }
 
             var salt = _passwordService.CreateSalt();
@@ -41,8 +36,6 @@ namespace BT.Application.Features.AuthFeatures.Commands
 
             await _dataContext.Users.AddAsync(user);
             await _dataContext.SaveChangesAsync();
-
-            var newUser = await _dataContext.Users.SingleOrDefaultAsync(x => x.Id == user.Id);
 
             return Unit.Value;
         }
