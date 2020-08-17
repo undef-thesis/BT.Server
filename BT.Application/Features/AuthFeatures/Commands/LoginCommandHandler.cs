@@ -1,10 +1,10 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BT.Application.Common;
 using MediatR;
 using BT.Application.Services.Auth;
 using Microsoft.EntityFrameworkCore;
+using BT.Application.Exceptions;
 
 namespace BT.Application.Features.AuthFeatures.Commands
 {
@@ -30,18 +30,23 @@ namespace BT.Application.Features.AuthFeatures.Commands
 
             if(user is null)
             {
-                throw new Exception("User is not exists");
+                throw new UserNotFoundException(command.Email);
             }
 
             var passwordHash = _passwordService.HashPassword(command.Password, user.Salt);
 
             if(passwordHash != user.Password)
             {
-                throw new Exception("Wrong password");
+                throw new InvalidPasswordException();
             }
 
-            var token = _authTokensService.CreateToken(user.Id);
-            token.Subject = command.TokenId;
+            var token = _authTokensService.GenerateToken(user.Id, user.Email);
+
+            var refreshToken = _authTokensService.GenerateRefreshToken(user.Id);
+            token.RefreshToken = refreshToken.Token;
+
+            await _dataContext.RefreshToken.AddAsync(refreshToken);
+            await _dataContext.SaveChangesAsync();
 
             _cache.Set(token);
 

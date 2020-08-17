@@ -11,16 +11,21 @@ using Microsoft.Extensions.Hosting;
 using MediatR;
 using BT.Application.Services.Auth;
 using BT.Api.Middlewares;
+using FluentValidation.AspNetCore;
+using BT.Application.Validators;
+using BT.Application.Options;
 
 namespace BT.Api
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfiguration { get; private set; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticConfiguration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -32,16 +37,18 @@ namespace BT.Api
 
             services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
 
-            var assembly = AppDomain.CurrentDomain.Load("BT.Application");
-            services.AddMediatR(assembly);
+            services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
-            services.AddJwt();
+            services.Configure<IdentityOptions>(Configuration.GetSection("IdentityOptions"));
+            services.AddJwt(Configuration["IdentityOptions:SecretKey"]);
             services.AddSwagger();
             services.AddVersioning();
 
+
             services.AddMemoryCache();
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
+            services.SetupValidators();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,7 +57,6 @@ namespace BT.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
             app.UseRouting();
 
@@ -60,8 +66,8 @@ namespace BT.Api
             app.ConfigSwagger();
 
             app.UseMiddleware<AuthMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseExceptionHandler("/error");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,32 +1,35 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using BT.Application.DTO;
+using BT.Application.Options;
+using BT.Domain.Domain;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BT.Application.Services.Auth
 {
     public class AuthTokenService : IAuthTokenService
     {
-        public AuthTokenService()
-        {
-            
-        }
+        private readonly IdentityOptions _options;
+        public AuthTokenService(IOptions<IdentityOptions> options)
+            => _options = options.Value;
 
-        public AuthDto CreateToken(Guid id)
+        public AuthDto GenerateToken(Guid userId, string email)
         {
             var handler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Issuer = id.ToString(),
+                Issuer = userId.ToString(),
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, id.ToString()),
+                    new Claim(ClaimTypes.Name, email),
                     new Claim(ClaimTypes.Role, "user"),
                 }),
-                Expires = DateTime.UtcNow.AddDays(60),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super_sercret_key")),
+                Expires = DateTime.UtcNow.AddMinutes(_options.TokenValidInMinutes),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -36,7 +39,7 @@ namespace BT.Application.Services.Auth
             {
                 Token = handler.WriteToken(securityToken),
                 Issuer = securityToken.Issuer,
-                Subject = id,
+                Subject = email,
                 ValidFrom = securityToken.ValidFrom,
                 ValidTo = securityToken.ValidTo
             };
@@ -44,11 +47,37 @@ namespace BT.Application.Services.Auth
             return token;
         }
 
+        public RefreshToken GenerateRefreshToken(Guid userId)
+        {
+            using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
+            {
+                var randomBytes = new byte[64];
+                rngCryptoServiceProvider.GetBytes(randomBytes);
+
+                var token = Convert.ToBase64String(randomBytes);
+                var expires = DateTime.UtcNow.AddDays(_options.RefreshTokenValidInDays);
+
+                var refreshToken = new RefreshToken(token, expires, userId);
+                
+                return refreshToken;
+            }
+        }
+
+        public AuthDto RefreshToken(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RevokeToken()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Validate(string token)
         {
             var handler = new JwtSecurityTokenHandler();
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super_sercret_key"));
-            
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
+
             try
             {
                 var jwt = handler.ReadToken(token);

@@ -7,7 +7,7 @@ namespace BT.Application.Common
     public interface IDataContext
     {
         DbSet<User> Users { get; set; }
-
+        DbSet<RefreshToken> RefreshToken { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

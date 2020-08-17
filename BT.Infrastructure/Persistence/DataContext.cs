@@ -8,6 +8,7 @@ namespace BT.Infrastructure.Persistence
     public class DataContext : DbContext, IDataContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshToken { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -17,6 +18,11 @@ namespace BT.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<User>()
+                .HasOne<RefreshToken>(x => x.RefreshToken)
+                .WithOne(x => x.User)
+                .HasForeignKey<RefreshToken>(x => x.UserId);
         }
 
         public async Task<int> SaveChangesAsync()

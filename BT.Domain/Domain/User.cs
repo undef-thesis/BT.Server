@@ -12,6 +12,7 @@ namespace BT.Domain.Domain
         public byte[] Salt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
+        public RefreshToken RefreshToken { get; private set; }
 
         protected User() {}
         
