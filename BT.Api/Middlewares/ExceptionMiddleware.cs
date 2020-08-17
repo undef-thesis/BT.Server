@@ -38,6 +38,12 @@ namespace BT.Api.Middlewares
 
             if(ex is UserNotFoundException)
                 code = (int)HttpStatusCode.NotFound;
+            else if(ex is TokenException)
+                code = (int)HttpStatusCode.UnprocessableEntity;
+            else if(ex is UserAlreadyExistsException)
+                code = (int)HttpStatusCode.UnprocessableEntity;
+            else if (ex is InvalidPasswordException)
+                code = (int)HttpStatusCode.Forbidden;
 
             response.StatusCode = code;
 
