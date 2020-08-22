@@ -18,9 +18,9 @@ namespace BT.Api.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("test-server")]
-        public string Get()
+        public IActionResult Get()
         {
-            return "BT.Server works!";
+            return Ok("BT.Server works!");
         }
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace BT.Api.Controllers
         [HttpGet]
         [Authorize]
         [Route("test-auth")]
-        public string GetAuth()
+        public IActionResult GetAuth()
         {
-            return "BT.Server with auth works!";
+            return Ok("BT.Server with auth works!");
         }
     }
 }

@@ -44,10 +44,22 @@ namespace BT.Api
             services.AddSwagger();
             services.AddVersioning();
 
-
             services.AddMemoryCache();
 
-            services.AddControllers().AddFluentValidation();
+            services.AddCors(options => options.AddPolicy("CorsPolicy", option =>
+            {
+                option
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                    .WithOrigins("http://localhost:4200");
+            }));
+
+            services.AddControllers()
+                .AddFluentValidation()
+
+                
             services.SetupValidators();
         }
 
@@ -59,7 +71,8 @@ namespace BT.Api
             }
             app.UseHttpsRedirection();
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
