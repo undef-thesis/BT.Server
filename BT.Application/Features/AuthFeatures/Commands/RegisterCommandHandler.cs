@@ -29,6 +29,11 @@ namespace BT.Application.Features.AuthFeatures.Commands
                 throw new UserAlreadyExistsException(command.Email);
             }
 
+            if (command.Password != command.ConfirmPassword)
+            {
+                throw new InvalidPasswordException();
+            }
+
             var salt = _passwordService.CreateSalt();
             var password = _passwordService.HashPassword(command.Password, salt);
 
