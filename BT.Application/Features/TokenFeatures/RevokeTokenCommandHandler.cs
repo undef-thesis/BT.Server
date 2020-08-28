@@ -10,15 +10,15 @@ using Microsoft.Extensions.Logging;
 
 namespace BT.Application.Features.TokenFeatures
 {
-    public class RevokeTokenHandler : IRequestHandler<RevokeTokenCommand>
+    public class RevokeTokenCommandHandler : IRequestHandler<RevokeTokenCommand>
     {
         private readonly IAuthTokenService _authTokensService;
         private readonly IAuthTokenCache _cache;
         private readonly IDataContext _dataContext;
-        private readonly ILogger<RevokeTokenHandler> _logger;
+        private readonly ILogger<RevokeTokenCommandHandler> _logger;
 
-        public RevokeTokenHandler(IAuthTokenService authTokensService, IAuthTokenCache cache,
-            IDataContext dataContext, ILogger<RevokeTokenHandler> logger)
+        public RevokeTokenCommandHandler(IAuthTokenService authTokensService, IAuthTokenCache cache,
+            IDataContext dataContext, ILogger<RevokeTokenCommandHandler> logger)
         {
             _authTokensService = authTokensService;
             _cache = cache;

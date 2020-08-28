@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using BT.Application.Features.Behaviours;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,5 +16,15 @@ namespace BT.Api.Controllers
         protected Guid UserId => User?.Identity?.IsAuthenticated == true ?
             Guid.Parse(User.Identity.Name) :
             Guid.Empty;
+
+        public async Task Evaluate(IRequest request)
+        {
+            if (request is AuthRequest authCommand)
+            {
+                authCommand.UserId = UserId;
+            }
+
+            await Mediator.Send(request);
+        }
     }
 }

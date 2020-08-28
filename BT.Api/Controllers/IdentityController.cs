@@ -42,9 +42,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginCommand command)
         {
-            await Mediator.Send(command);
-
-            var token = _authTokensCache.Get(command.Email);
+            var token = await Mediator.Send(command);
 
             return Ok(token);
         }
@@ -60,8 +58,6 @@ namespace BT.Api.Controllers
         public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand command)
         {
             var token = await Mediator.Send(command);
-
-           // var token = _authTokensCache.Get(command.TokenId);
 
             return Ok(token);
         }

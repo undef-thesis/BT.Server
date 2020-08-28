@@ -14,6 +14,7 @@ using BT.Api.Middlewares;
 using FluentValidation.AspNetCore;
 using BT.Application.Validators;
 using BT.Application.Options;
+using BT.Application.Features.Behaviours;
 
 namespace BT.Api
 {
@@ -56,11 +57,12 @@ namespace BT.Api
                     .WithOrigins("http://localhost:4200");
             }));
 
-            services.AddControllers()
-                .AddFluentValidation()
-
-                
             services.SetupValidators();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+            services.AddControllers()
+                .AddFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

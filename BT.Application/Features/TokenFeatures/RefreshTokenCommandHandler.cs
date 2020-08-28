@@ -10,15 +10,15 @@ using Microsoft.Extensions.Logging;
 
 namespace BT.Application.Features.TokenFeatures
 {
-    public class RefreshTokenHandler : IRequestHandler<RefreshTokenCommand, AuthDto>
+    public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, AuthDto>
     {
         private readonly IAuthTokenService _authTokensService;
         private readonly IAuthTokenCache _cache;
         private readonly IDataContext _dataContext;
-        private readonly ILogger<RefreshTokenHandler> _logger;
+        private readonly ILogger<RefreshTokenCommandHandler> _logger;
 
-        public RefreshTokenHandler(IAuthTokenService authTokensService, IAuthTokenCache cache, 
-            IDataContext dataContext, ILogger<RefreshTokenHandler> logger)
+        public RefreshTokenCommandHandler(IAuthTokenService authTokensService, IAuthTokenCache cache, 
+            IDataContext dataContext, ILogger<RefreshTokenCommandHandler> logger)
         {
             _authTokensService = authTokensService;
             _cache = cache;

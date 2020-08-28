@@ -14,7 +14,7 @@ namespace BT.Application.Services.Auth
         public void Set(AuthDto dto)
             => _cache.Set(dto.Subject, dto, TimeSpan.FromSeconds(30));
 
-        public AuthDto Get(string email)
-            => _cache.Get<AuthDto>(email);
+        public AuthDto Get(Guid userId)
+            => _cache.Get<AuthDto>(userId);
     }
 }
