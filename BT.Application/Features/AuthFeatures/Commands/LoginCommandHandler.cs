@@ -5,10 +5,11 @@ using MediatR;
 using BT.Application.Services.Auth;
 using Microsoft.EntityFrameworkCore;
 using BT.Application.Exceptions;
+using BT.Application.DTO;
 
 namespace BT.Application.Features.AuthFeatures.Commands
 {
-    public class LoginCommandHandler: IRequestHandler<LoginCommand>
+    public class LoginCommandHandler: IRequestHandler<LoginCommand, AuthDto>
     {
         private readonly IAuthTokenService _authTokensService;
         private readonly IPasswordService _passwordService;
@@ -24,7 +25,7 @@ namespace BT.Application.Features.AuthFeatures.Commands
             _dataContext = dataContext;
         }
 
-        public async Task<Unit> Handle(LoginCommand command, CancellationToken cancellationToken)
+        public async Task<AuthDto> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
             var user = await _dataContext.Users.SingleOrDefaultAsync(x => x.Email == command.Email);
 
@@ -50,7 +51,7 @@ namespace BT.Application.Features.AuthFeatures.Commands
 
             _cache.Set(token);
 
-            return Unit.Value;
+            return token;
         }
     }
 }

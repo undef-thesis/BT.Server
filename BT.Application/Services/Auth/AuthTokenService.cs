@@ -25,7 +25,7 @@ namespace BT.Application.Services.Auth
                 Issuer = userId.ToString(),
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, email),
+                    new Claim(ClaimTypes.Name, userId.ToString()),
                     new Claim(ClaimTypes.Role, "user"),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_options.TokenValidInMinutes),
@@ -39,7 +39,7 @@ namespace BT.Application.Services.Auth
             {
                 Token = handler.WriteToken(securityToken),
                 Issuer = securityToken.Issuer,
-                Subject = email,
+                Subject = userId.ToString(),
                 ValidFrom = securityToken.ValidFrom,
                 ValidTo = securityToken.ValidTo
             };

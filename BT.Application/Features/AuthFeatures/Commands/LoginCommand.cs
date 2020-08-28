@@ -1,11 +1,11 @@
 using System;
+using BT.Application.DTO;
 using MediatR;
 
 namespace BT.Application.Features.AuthFeatures.Commands
 {
-    public class LoginCommand : IRequest
+    public class LoginCommand : IRequest<AuthDto>
     {
-        public Guid TokenId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

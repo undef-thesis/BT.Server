@@ -1,8 +1,9 @@
+using BT.Application.Features.Behaviours;
 using MediatR;
 
 namespace BT.Application.Features.AuthFeatures.Commands
 {
-    public class RegisterCommand : IRequest
+    public class RegisterCommand : AuthRequest, IRequest
     {
         public string Email { get; set; }
         public string Firstname { get; set; }
