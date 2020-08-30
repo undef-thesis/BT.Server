@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BT.Application.Features.AuthFeatures.Commands;
 using BT.Application.Services.Auth;
-using BT.Application.Features.TokenFeatures;
+using BT.Application.Features.AuthFeatures.Commands.Login;
+using BT.Application.Features.TokenFeatures.Commands.RefreshToken;
+using BT.Application.Features.TokenFeatures.Commands.RevokeToken;
+using BT.Application.Features.AuthFeatures.Commands.Register;
 
 namespace BT.Api.Controllers
 {

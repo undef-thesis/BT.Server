@@ -2,7 +2,7 @@ using System;
 using BT.Application.DTO;
 using MediatR;
 
-namespace BT.Application.Features.AuthFeatures.Commands
+namespace BT.Application.Features.AuthFeatures.Commands.Login
 {
     public class LoginCommand : IRequest<AuthDto>
     {

@@ -1,7 +1,7 @@
 using BT.Application.Features.Behaviours;
 using MediatR;
 
-namespace BT.Application.Features.AuthFeatures.Commands
+namespace BT.Application.Features.AuthFeatures.Commands.Register
 {
     public class RegisterCommand : AuthRequest, IRequest
     {

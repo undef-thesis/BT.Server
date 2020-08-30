@@ -1,7 +1,7 @@
 using BT.Application.Features.Behaviours;
 using MediatR;
 
-namespace BT.Application.Features.TokenFeatures
+namespace BT.Application.Features.TokenFeatures.Commands.RevokeToken
 {
     public class RevokeTokenCommand : AuthRequest, IRequest
     {
