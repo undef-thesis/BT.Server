@@ -44,6 +44,8 @@ namespace BT.Api.Middlewares
                 code = (int)HttpStatusCode.UnprocessableEntity;
             else if (ex is InvalidPasswordException)
                 code = (int)HttpStatusCode.Forbidden;
+            else if(ex is MeetingNotFoundException)
+                code = (int)HttpStatusCode.NotFound;
 
             response.StatusCode = code;
 
