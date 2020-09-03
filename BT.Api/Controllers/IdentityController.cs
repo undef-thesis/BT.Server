@@ -29,7 +29,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterCommand command)
         {
-            await Mediator.Send(command);
+            await Execute(command);
 
             return Created($"users/{command.Email}", new object());
         }
@@ -44,7 +44,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginCommand command)
         {
-            var token = await Mediator.Send(command);
+            var token = await Execute(command);
 
             return Ok(token);
         }
@@ -59,7 +59,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand command)
         {
-            var token = await Mediator.Send(command);
+            var token = await Execute(command);
 
             return Ok(token);
         }
@@ -74,7 +74,7 @@ namespace BT.Api.Controllers
         [Authorize]
         public async Task<IActionResult> RevokeToken([FromBody]RevokeTokenCommand command)
         {
-            await Mediator.Send(command);
+            await Execute(command);
 
             return Ok();
         }
