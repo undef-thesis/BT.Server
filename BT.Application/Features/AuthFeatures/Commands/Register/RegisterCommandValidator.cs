@@ -1,11 +1,11 @@
-using BT.Application.Features.AuthFeatures.Commands;
+using BT.Application.Features.AuthFeatures.Commands.Register;
 using FluentValidation;
 
-namespace BT.Application.Validators.Auth
+namespace BT.Application.Features.AuthFeatures.Commands.Register
 {
-    public class RegisterValidator : AbstractValidator<RegisterCommand>
+    public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
-        public RegisterValidator()
+        public RegisterCommandValidator()
         {
             RuleFor(user => user.Email)
                 .NotEmpty();

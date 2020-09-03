@@ -1,4 +1,3 @@
-using System;
 using BT.Application.DTO;
 using MediatR;
 

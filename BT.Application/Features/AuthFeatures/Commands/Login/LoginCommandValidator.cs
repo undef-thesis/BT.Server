@@ -1,11 +1,10 @@
-using BT.Application.Features.AuthFeatures.Commands;
 using FluentValidation;
 
-namespace BT.Application.Validators.Auth
+namespace BT.Application.Features.AuthFeatures.Commands.Login
 {
-    public class LoginValidator : AbstractValidator<LoginCommand>
+    public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {
-        public LoginValidator()
+        public LoginCommandValidator()
         {
             RuleFor(user => user.Email)
                 .NotEmpty();
