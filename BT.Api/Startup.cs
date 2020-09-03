@@ -15,6 +15,8 @@ using FluentValidation.AspNetCore;
 using BT.Application.Validators;
 using BT.Application.Options;
 using BT.Application.Features.Behaviours;
+using System.Reflection;
+using BT.Application.Features.MeetingFeatures.Queries;
 
 namespace BT.Api
 {
@@ -40,6 +42,8 @@ namespace BT.Api
 
             services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
+            services.AddSingleton(AutoMapperConfig.Initialize());
+
             services.Configure<IdentityOptions>(Configuration.GetSection("IdentityOptions"));
             services.AddJwt(Configuration["IdentityOptions:SecretKey"]);
             services.AddSwagger();
@@ -62,7 +66,10 @@ namespace BT.Api
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
             services.AddControllers()
-                .AddFluentValidation();
+                .AddFluentValidation()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

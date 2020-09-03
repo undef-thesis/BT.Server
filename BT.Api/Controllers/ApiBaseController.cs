@@ -17,14 +17,14 @@ namespace BT.Api.Controllers
             Guid.Parse(User.Identity.Name) :
             Guid.Empty;
 
-        public async Task Evaluate(IRequest request)
+        public async Task<object> Execute<T>(T request)
         {
             if (request is AuthRequest authCommand)
             {
                 authCommand.UserId = UserId;
             }
 
-            await Mediator.Send(request);
+            return await Mediator.Send(request);
         }
     }
 }

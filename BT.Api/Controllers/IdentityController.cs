@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BT.Application.Features.AuthFeatures.Commands;
 using BT.Application.Services.Auth;
-using BT.Application.Features.TokenFeatures;
+using BT.Application.Features.AuthFeatures.Commands.Login;
+using BT.Application.Features.TokenFeatures.Commands.RefreshToken;
+using BT.Application.Features.TokenFeatures.Commands.RevokeToken;
+using BT.Application.Features.AuthFeatures.Commands.Register;
 
 namespace BT.Api.Controllers
 {
@@ -27,7 +29,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterCommand command)
         {
-            await Mediator.Send(command);
+            await Execute(command);
 
             return Created($"users/{command.Email}", new object());
         }
@@ -42,7 +44,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginCommand command)
         {
-            var token = await Mediator.Send(command);
+            var token = await Execute(command);
 
             return Ok(token);
         }
@@ -57,7 +59,7 @@ namespace BT.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand command)
         {
-            var token = await Mediator.Send(command);
+            var token = await Execute(command);
 
             return Ok(token);
         }
@@ -72,7 +74,7 @@ namespace BT.Api.Controllers
         [Authorize]
         public async Task<IActionResult> RevokeToken([FromBody]RevokeTokenCommand command)
         {
-            await Mediator.Send(command);
+            await Execute(command);
 
             return Ok();
         }

@@ -1,7 +1,7 @@
 using BT.Application.DTO;
 using MediatR;
 
-namespace BT.Application.Features.TokenFeatures
+namespace BT.Application.Features.TokenFeatures.Commands.RefreshToken
 {
     public class RefreshTokenCommand : IRequest<AuthDto>
     {

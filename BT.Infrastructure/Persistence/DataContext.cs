@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using System.Threading.Tasks;
 using BT.Application.Common;
 using BT.Domain.Domain;
@@ -9,6 +11,9 @@ namespace BT.Infrastructure.Persistence
     {
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshToken { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<UserMeeting> UserMeeting { get; set; }
+        public DbSet<Address> Address { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -22,7 +27,31 @@ namespace BT.Infrastructure.Persistence
             builder.Entity<User>()
                 .HasOne<RefreshToken>(x => x.RefreshToken)
                 .WithOne(x => x.User)
-                .HasForeignKey<RefreshToken>(x => x.UserId);
+                .HasForeignKey<RefreshToken>(x => x.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<User>()
+                .HasMany(x => x.OrganizedMeetings)
+                .WithOne(x => x.MeetingOrganizer)
+                .HasForeignKey(x => x.MeetingOrganizerId);
+                
+
+            builder.Entity<UserMeeting>()
+                .HasKey(x => new { x.UserId, x.MeetingId });
+            builder.Entity<UserMeeting>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.EnrolledMeetings)
+                .HasForeignKey(x => x.UserId);
+            builder.Entity<UserMeeting>()
+                .HasOne(x => x.Meeting)
+                .WithMany(x => x.Partcipants)
+                .HasForeignKey(x => x.MeetingId);
+
+            builder.Entity<Meeting>()
+                .HasOne<Address>(x => x.Address)
+                .WithOne(x => x.Meeting)
+                .HasForeignKey<Address>(x => x.MeetingId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public async Task<int> SaveChangesAsync()

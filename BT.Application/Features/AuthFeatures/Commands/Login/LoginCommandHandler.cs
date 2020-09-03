@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using BT.Application.Exceptions;
 using BT.Application.DTO;
 
-namespace BT.Application.Features.AuthFeatures.Commands
+namespace BT.Application.Features.AuthFeatures.Commands.Login
 {
     public class LoginCommandHandler: IRequestHandler<LoginCommand, AuthDto>
     {

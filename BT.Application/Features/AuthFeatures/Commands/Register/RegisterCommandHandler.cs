@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using BT.Application.Services.Auth;
 using BT.Application.Exceptions;
 
-namespace BT.Application.Features.AuthFeatures.Commands
+namespace BT.Application.Features.AuthFeatures.Commands.Register
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
     {

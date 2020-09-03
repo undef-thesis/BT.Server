@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BT.Domain.Domain
 {
@@ -13,6 +14,8 @@ namespace BT.Domain.Domain
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
         public RefreshToken RefreshToken { get; private set; }
+        public ICollection<Meeting> OrganizedMeetings { get; set; }
+        public ICollection<UserMeeting> EnrolledMeetings { get; set; }
 
         protected User() {}
         

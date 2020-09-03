@@ -9,5 +9,11 @@ namespace BT.Application.Exceptions
         {
 
         }
+
+        public UserNotFoundException()
+            : base($"User was not found")
+        {
+
+        }
     }
 }

@@ -1,9 +1,8 @@
 using System;
-using MediatR;
 
 namespace BT.Application.Features.Behaviours
 {
-    public class AuthRequest : IRequest
+    public class AuthRequest
     {
         public Guid UserId { get; set; }
     }
