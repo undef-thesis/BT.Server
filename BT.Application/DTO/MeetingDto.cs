@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using BT.Domain.Domain;
 
 namespace BT.Application.DTO
 {
@@ -11,5 +9,6 @@ namespace BT.Application.DTO
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public CategoryDto Category { get; set; }
     }
 }

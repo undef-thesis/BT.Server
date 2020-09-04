@@ -33,7 +33,7 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetEnrolledMeetings
             }
 
             var userMeetings = await _dataContext.Users.Include(x => x.EnrolledMeetings)
-                .ThenInclude(x => x.Meeting).SingleOrDefaultAsync(x => x.Id == query.UserId);
+                .ThenInclude(x => x.Meeting).ThenInclude(x => x.Category).SingleOrDefaultAsync(x => x.Id == query.UserId);
 
             var meetings = userMeetings.EnrolledMeetings.Select(x => x.Meeting).ToList();
 

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BT.Application.Common;
@@ -26,9 +27,16 @@ namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
                 throw new UserNotFoundException();
             }
 
-            var meeting = new Meeting(command.Name, command.Description, user.Id);
+            var category = await _dataContext.Categories.SingleOrDefaultAsync(x => x.Name == command.Category);
+
+            if (category is null)
+            {
+                throw new Exception("Category was not found");
+            }
+
+            var meeting = new Meeting(command.Name, command.Description, user.Id, category.Id);
             var address = new Address(command.Latitude, command.Longitude, command.Country,
-                command.Province, command.City, command.Street, meeting.Id);
+                command.Province, command.City, command.Street, meeting.Id);     
 
             await _dataContext.Meetings.AddAsync(meeting);
             await _dataContext.Address.AddAsync(address);

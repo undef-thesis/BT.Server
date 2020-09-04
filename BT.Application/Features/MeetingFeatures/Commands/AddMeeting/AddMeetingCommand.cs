@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using BT.Application.Features.Behaviours;
+using BT.Domain.Domain;
 using MediatR;
 
 namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
@@ -13,5 +15,6 @@ namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
         public string Province { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
+        public string Category { get; set; }
     }
 }

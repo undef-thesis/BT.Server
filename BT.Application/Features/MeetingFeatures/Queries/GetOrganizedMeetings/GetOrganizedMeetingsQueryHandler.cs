@@ -24,7 +24,8 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetOrganizedMeetings
 
         public async Task<IEnumerable<MeetingDto>> Handle(GetOrganizedMeetingsQuery query, CancellationToken cancellationToken)
         {
-            var meetings = await _dataContext.Meetings.Where(x => x.MeetingOrganizerId == query.UserId).ToListAsync();
+            var meetings = await _dataContext.Meetings.Include(x => x.Category)
+                .Where(x => x.MeetingOrganizerId == query.UserId).ToListAsync();
             
             var mapped = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingDto>>(meetings);
             return mapped;
