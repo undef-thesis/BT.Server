@@ -27,11 +27,12 @@ namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
                 throw new UserNotFoundException();
             }
 
+            command.Category = command.Category.ToLowerInvariant();
             var category = await _dataContext.Categories.SingleOrDefaultAsync(x => x.Name == command.Category);
 
             if (category is null)
             {
-                throw new Exception("Category was not found");
+                throw new CategoryNotFoundException();
             }
 
             var meeting = new Meeting(command.Name, command.Description, user.Id, category.Id);

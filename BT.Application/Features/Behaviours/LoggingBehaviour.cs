@@ -19,7 +19,7 @@ namespace BT.Application.Features.Behaviours
         
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            //Request
+            // Request
             _logger.LogInformation($"Handling {typeof(TRequest).Name}");
             Type myType = request.GetType();
             
@@ -31,7 +31,7 @@ namespace BT.Application.Features.Behaviours
             }
             var response = await next();
 
-            //Response
+            // Response
             _logger.LogInformation($"Handled {typeof(TResponse).Name}");
             return response;
         }

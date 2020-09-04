@@ -30,7 +30,7 @@ namespace BT.Application.Features.CommentFeatures.Commands.UpdateComment
                 throw new CommentInvalidOwnerException();
             }
 
-            comment.Content = command.Content;
+            comment.UpdateComment(command.Content);
 
             _dataContext.Comments.Update(comment);
             await _dataContext.SaveChangesAsync();

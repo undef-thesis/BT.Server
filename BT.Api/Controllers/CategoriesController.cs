@@ -12,7 +12,7 @@ namespace BT.Api.Controllers
         /// <summary>
         /// Get all categories
         /// </summary>
-        /// <returns>CategriesDto</returns>
+        /// <returns>CategoriesDto</returns>
         [HttpGet]
         [Authorize]
         [Route("")]
@@ -23,6 +23,7 @@ namespace BT.Api.Controllers
             return Ok(categories);
         }
 
+        //TODO Endpoint just for admin
         /// <summary>
         /// Create new category
         /// </summary>

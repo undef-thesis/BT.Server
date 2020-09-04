@@ -5,18 +5,18 @@ namespace BT.Domain.Domain
 {
     public class Meeting
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public Guid MeetingOrganizerId { get; set; }
-        public User MeetingOrganizer { get; set; }
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
+        public Guid MeetingOrganizerId { get; private set; }
+        public User MeetingOrganizer { get; private set; }
         public Address Address { get; private set; }
-        public ICollection<UserMeeting> Partcipants { get; set; }
-        public ICollection<Comment> Comments { get; set; }
-        public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
+        public ICollection<UserMeeting> Partcipants { get; private set; }
+        public ICollection<Comment> Comments { get; private set; }
+        public Guid CategoryId { get; private set; }
+        public Category Category { get; private set; }
 
         protected Meeting() {}
 
@@ -30,6 +30,13 @@ namespace BT.Domain.Domain
 
             MeetingOrganizerId = meetingOrganizerId;
             CategoryId = categoryId;
+        }
+
+        public void UpdateMeeting(string name, string description)
+        {
+            Name = name;
+            Description = description;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

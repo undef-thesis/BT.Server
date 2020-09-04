@@ -41,7 +41,7 @@ namespace BT.Application.Features.AuthFeatures.Commands.Login
                 throw new InvalidPasswordException();
             }
 
-            var token = _authTokensService.GenerateToken(user.Id, user.Email);
+            var token = _authTokensService.GenerateToken(user.Id, user.Email.ToLowerInvariant());
 
             var refreshToken = _authTokensService.GenerateRefreshToken(user.Id);
             token.RefreshToken = refreshToken.Token;

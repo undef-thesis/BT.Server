@@ -42,7 +42,7 @@ namespace BT.Api.Controllers
         /// <param name="id">Meeting id</param> 
         /// <returns>Return MeetingDto with address</returns>
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         [Route("{id}")]
         public async Task<IActionResult> GetDetails(Guid id)
         {
