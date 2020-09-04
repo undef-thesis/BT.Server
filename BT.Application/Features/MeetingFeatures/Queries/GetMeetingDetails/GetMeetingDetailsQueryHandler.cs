@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails
 {
-    public class GetMeetingDetailsQueryHandler : IRequestHandler<GetMeetingDetailsQuery, MeetingDto>
+    public class GetMeetingDetailsQueryHandler : IRequestHandler<GetMeetingDetailsQuery, MeetingDetailsDto>
     {
         private readonly IDataContext _dataContext;
         private readonly IMapper _mapper;
@@ -21,16 +21,17 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails
             _mapper = mapper;
         }
 
-        public async Task<MeetingDto> Handle(GetMeetingDetailsQuery query, CancellationToken cancellationToken)
+        public async Task<MeetingDetailsDto> Handle(GetMeetingDetailsQuery query, CancellationToken cancellationToken)
         {
-            var meetingDetails = await _dataContext.Meetings.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == query.Id);
+            var meetingDetails = await _dataContext.Meetings.Include(x => x.Address)
+                .Include(x => x.Comments).SingleOrDefaultAsync(x => x.Id == query.Id);
 
             if (meetingDetails is null)
             {
                 throw new MeetingNotFoundException();
             }
 
-            return _mapper.Map<Meeting, MeetingDto>(meetingDetails);
+            return _mapper.Map<Meeting, MeetingDetailsDto>(meetingDetails);
         }
     }
 }
