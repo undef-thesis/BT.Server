@@ -15,8 +15,6 @@ using FluentValidation.AspNetCore;
 using BT.Application.Validators;
 using BT.Application.Options;
 using BT.Application.Features.Behaviours;
-using System.Reflection;
-using BT.Application.Features.MeetingFeatures.Queries;
 
 namespace BT.Api
 {

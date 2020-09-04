@@ -5,12 +5,14 @@ namespace BT.Domain.Domain
     public class Address
     {
         public Guid Id { get; private set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string Country { get; set; }
-        public string Province { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
+        public string Country { get; private set; }
+        public string Province { get; private set; }
+        public string City { get; private set; }
+        public string Street { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
         public Guid MeetingId { get; private set; }
         public Meeting Meeting { get; private set; }
 
@@ -25,8 +27,21 @@ namespace BT.Domain.Domain
             Province = province;
             City = city;
             Street = street;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+
             MeetingId = meetingId;
         }
 
+        public void UpdateAddress(double latitude, double longitude, string country, string province, string city, string street)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+            Country = country;
+            Province = province;
+            City = city;
+            Street = street;
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

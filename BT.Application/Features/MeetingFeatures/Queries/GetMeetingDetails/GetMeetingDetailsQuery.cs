@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails
 {
-    public class GetMeetingDetailsQuery : AuthRequest, IRequest<MeetingDetailsDto>
+    public class GetMeetingDetailsQuery : IRequest<MeetingDetailsDto>
     {
         public Guid Id { get; set; }
     }

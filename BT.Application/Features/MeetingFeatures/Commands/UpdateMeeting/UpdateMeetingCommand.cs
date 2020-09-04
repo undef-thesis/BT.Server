@@ -15,5 +15,6 @@ namespace BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting
         public string Province { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
+        public string Category { get; set; }
     }
 }

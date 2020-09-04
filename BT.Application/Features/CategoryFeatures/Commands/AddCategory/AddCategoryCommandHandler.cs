@@ -19,6 +19,8 @@ namespace BT.Application.Features.CategoryFeatures.Commands.AddCategory
 
         public async Task<Unit> Handle(AddCategoryCommand command, CancellationToken cancellationToken)
         {
+            command.Name = command.Name.ToLowerInvariant();
+
             var category = await _dataContext.Categories.SingleOrDefaultAsync(x => x.Name == command.Name);
 
             if(category != null)

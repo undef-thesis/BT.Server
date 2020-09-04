@@ -14,9 +14,9 @@ namespace BT.Domain.Domain
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
         public RefreshToken RefreshToken { get; private set; }
-        public ICollection<Meeting> OrganizedMeetings { get; set; }
-        public ICollection<UserMeeting> EnrolledMeetings { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Meeting> OrganizedMeetings { get; private set; }
+        public ICollection<UserMeeting> EnrolledMeetings { get; private set; }
+        public ICollection<Comment> Comments { get; private set; }
 
         protected User() {}
         

@@ -27,18 +27,20 @@ namespace BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting
                 throw new UserIsNotMeetingOrganizerException();
             }
 
-            meeting.Name = command.Name;
-            meeting.Description = command.Description;
+            var category = await _dataContext.Categories.SingleOrDefaultAsync(x => x.Id == meeting.CategoryId);
 
-            address.Latitude = command.Latitude;
-            address.Longitude = command.Longitude;
-            address.Country = command.Country;
-            address.Province = command.Province;
-            address.City = command.City;
-            address.Street = command.Street;
+            if (category is null)
+            {
+                throw new CategoryNotFoundException();
+            }
+
+            meeting.UpdateMeeting(command.Name, command.Description);
+            address.UpdateAddress(command.Latitude, command.Longitude, command.Country, command.Province, command.City, command.Street);
+            category.UpdateCategory(command.Category.ToLowerInvariant());
 
             _dataContext.Meetings.Update(meeting);
             _dataContext.Address.Update(address);
+            _dataContext.Categories.Update(category);
 
             await _dataContext.SaveChangesAsync();
 
