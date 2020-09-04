@@ -15,10 +15,12 @@ namespace BT.Domain.Domain
         public Address Address { get; private set; }
         public ICollection<UserMeeting> Partcipants { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public Guid CategoryId { get; set; }
+        public Category Category { get; set; }
 
         protected Meeting() {}
 
-        public Meeting(string name, string description, Guid meetingOrganizerId)
+        public Meeting(string name, string description, Guid meetingOrganizerId, Guid categoryId)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -27,6 +29,7 @@ namespace BT.Domain.Domain
             UpdatedAt = DateTime.UtcNow;
 
             MeetingOrganizerId = meetingOrganizerId;
+            CategoryId = categoryId;
         }
     }
 }

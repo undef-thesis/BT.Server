@@ -12,6 +12,7 @@ namespace BT.Application.Common
         DbSet<UserMeeting> UserMeeting { get; set; }
         DbSet<Address> Address { get; set; }
         DbSet<Comment> Comments { get; set; }
+        DbSet<Category> Categories { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

@@ -15,6 +15,7 @@ namespace BT.Infrastructure.Persistence
         public DbSet<UserMeeting> UserMeeting { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -62,6 +63,11 @@ namespace BT.Infrastructure.Persistence
                 .HasMany(x => x.Comments)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
+
+            builder.Entity<Category>()
+                .HasMany(x => x.Meetings)
+                .WithOne(x => x.Category)
+                .HasForeignKey(x => x.CategoryId);
         }
 
         public async Task<int> SaveChangesAsync()

@@ -12,5 +12,6 @@ namespace BT.Application.DTO
         public DateTime UpdatedAt { get; set; }
         public AddressDto Address { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
+        public CategoryDto Category { get; set; }
     }
 }

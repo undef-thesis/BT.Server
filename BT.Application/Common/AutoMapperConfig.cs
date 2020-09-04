@@ -14,6 +14,7 @@ namespace BT.Application.Common
                cfg.CreateMap<Meeting, MeetingDetailsDto>();
                cfg.CreateMap<Address, AddressDto>();
                cfg.CreateMap<Comment, CommentDto>();
+               cfg.CreateMap<Category, CategoryDto>();
            })
             .CreateMapper();
 
