@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using BT.Domain.Domain;
 
 namespace BT.Application.DTO
 {
-    public class MeetingDto
+    public class CommentDto
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public Guid UserId { get; private set; }
     }
 }

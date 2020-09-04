@@ -16,6 +16,7 @@ namespace BT.Domain.Domain
         public RefreshToken RefreshToken { get; private set; }
         public ICollection<Meeting> OrganizedMeetings { get; set; }
         public ICollection<UserMeeting> EnrolledMeetings { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
         protected User() {}
         

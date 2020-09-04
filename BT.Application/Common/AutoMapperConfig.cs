@@ -11,7 +11,9 @@ namespace BT.Application.Common
             var config = new MapperConfiguration(cfg =>
            {
                cfg.CreateMap<Meeting, MeetingDto>();
+               cfg.CreateMap<Meeting, MeetingDetailsDto>();
                cfg.CreateMap<Address, AddressDto>();
+               cfg.CreateMap<Comment, CommentDto>();
            })
             .CreateMapper();
 
