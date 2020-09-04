@@ -14,6 +14,7 @@ namespace BT.Domain.Domain
         public User MeetingOrganizer { get; set; }
         public Address Address { get; private set; }
         public ICollection<UserMeeting> Partcipants { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
         protected Meeting() {}
 

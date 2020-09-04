@@ -1,5 +1,6 @@
 using BT.Application.Features.AuthFeatures.Commands.Login;
 using BT.Application.Features.AuthFeatures.Commands.Register;
+using BT.Application.Features.CommentFeatures.Commands.AddComment;
 using BT.Application.Features.MeetingFeatures.Commands.AddMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
@@ -20,6 +21,8 @@ namespace BT.Application.Validators
             services.AddTransient<IValidator<JoinMeetingCommand>, JoinMeetingCommandValidator>();
             services.AddTransient<IValidator<DeleteMeetingCommand>, DeleteMeetingCommandValidator>();
             services.AddTransient<IValidator<UpdateMeetingCommand>, UpdateMeetingCommandValidator>();
+
+            services.AddTransient<IValidator<AddCommentCommand>, AddCommentCommandValidator>();
         }
     }
 }

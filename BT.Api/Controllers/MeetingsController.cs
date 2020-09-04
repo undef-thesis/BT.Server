@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using BT.Application.Common;
 using BT.Application.Features.MeetingFeatures.Commands.AddMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
@@ -17,10 +16,9 @@ namespace BT.Api.Controllers
     [ApiVersion("1.0")]
     public class MeetingsController : ApiBaseController
     {
-        private readonly IDataContext _dataContext;
-        public MeetingsController(IDataContext dataContext)
+        public MeetingsController()
         {
-            _dataContext = dataContext;
+
         }
 
         /// <summary>

@@ -14,6 +14,7 @@ namespace BT.Infrastructure.Persistence
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<UserMeeting> UserMeeting { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -35,7 +36,6 @@ namespace BT.Infrastructure.Persistence
                 .WithOne(x => x.MeetingOrganizer)
                 .HasForeignKey(x => x.MeetingOrganizerId);
                 
-
             builder.Entity<UserMeeting>()
                 .HasKey(x => new { x.UserId, x.MeetingId });
             builder.Entity<UserMeeting>()
@@ -52,6 +52,16 @@ namespace BT.Infrastructure.Persistence
                 .WithOne(x => x.Meeting)
                 .HasForeignKey<Address>(x => x.MeetingId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Meeting>()
+                .HasMany(x => x.Comments)
+                .WithOne(x => x.Meeting)
+                .HasForeignKey(x => x.MeetingId);
+
+            builder.Entity<User>()
+                .HasMany(x => x.Comments)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
         }
 
         public async Task<int> SaveChangesAsync()
