@@ -36,7 +36,7 @@ namespace BT.Api
             services.AddScoped<IAuthTokenCache, AuthTokenCache>();
             services.AddScoped<IDataContext, DataContext>();
 
-            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
+            services.AddDbContext<DataContext>();
 
             services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
@@ -79,7 +79,7 @@ namespace BT.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("CorsPolicy");
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
