@@ -34,7 +34,7 @@ namespace BT.Infrastructure.Persistence
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("");
+                optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
             }
         }
 
@@ -96,6 +96,8 @@ namespace BT.Infrastructure.Persistence
                 .HasMany(x => x.Meetings)
                 .WithOne(x => x.Category)
                 .HasForeignKey(x => x.CategoryId);
+
+            builder.Seed();
         }
 
         public async Task<int> SaveChangesAsync()
