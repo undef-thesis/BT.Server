@@ -34,8 +34,9 @@ namespace BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting
                 throw new CategoryNotFoundException();
             }
 
-            meeting.UpdateMeeting(command.Name, command.Description);
-            address.UpdateAddress(command.Latitude, command.Longitude, command.Country, command.Province, command.City, command.Street);
+            meeting.UpdateMeeting(command.Name, command.Description, command.MaxParticipants, command.Date);
+            address.UpdateAddress(command.Latitude, command.Longitude, command.Country, 
+                command.Province, command.City, command.Street);
             category.UpdateCategory(command.Category.ToLowerInvariant());
 
             _dataContext.Meetings.Update(meeting);
