@@ -8,6 +8,7 @@ namespace BT.Application.Features.AuthFeatures.Commands.Register
         public RegisterCommandValidator()
         {
             RuleFor(user => user.Email)
+                .EmailAddress()
                 .NotEmpty();
             RuleFor(user => user.Password)
                 .NotEmpty()
