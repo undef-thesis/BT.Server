@@ -8,6 +8,8 @@ namespace BT.Domain.Domain
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
+        public int MaxParticipants { get; protected set; }
+        public DateTime Date { get; protected set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
         public Guid MeetingOrganizerId { get; private set; }
@@ -17,14 +19,17 @@ namespace BT.Domain.Domain
         public ICollection<Comment> Comments { get; private set; }
         public Guid CategoryId { get; private set; }
         public Category Category { get; private set; }
+        public ICollection<MeetingImage> Images { get; private set; }
 
         protected Meeting() {}
 
-        public Meeting(string name, string description, Guid meetingOrganizerId, Guid categoryId)
+        public Meeting(string name, string description, int maxParticipants, DateTime date, Guid meetingOrganizerId, Guid categoryId)
         {
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
+            MaxParticipants = maxParticipants;
+            Date = date;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
 
@@ -32,10 +37,12 @@ namespace BT.Domain.Domain
             CategoryId = categoryId;
         }
 
-        public void UpdateMeeting(string name, string description)
+        public void UpdateMeeting(string name, string description, int maxParticipants, DateTime date)
         {
             Name = name;
-            Description = description;
+            Description = description; 
+            MaxParticipants = maxParticipants;
+            Date = date;
             UpdatedAt = DateTime.UtcNow;
         }
     }

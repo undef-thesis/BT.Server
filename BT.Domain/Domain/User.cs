@@ -17,6 +17,7 @@ namespace BT.Domain.Domain
         public ICollection<Meeting> OrganizedMeetings { get; private set; }
         public ICollection<UserMeeting> EnrolledMeetings { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
+        public Avatar Avatar { get; set; }
 
         protected User() {}
         

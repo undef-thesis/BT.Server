@@ -13,5 +13,6 @@ namespace BT.Application.DTO
         public AddressDto Address { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
         public CategoryDto Category { get; set; }
-    }
+        public ICollection<MeetingImageDto> Images { get ; set; }
+}
 }

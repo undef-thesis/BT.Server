@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BT.Application.Features.MeetingFeatures.Commands.AddMeeting;
+using BT.Application.Features.MeetingFeatures.Commands.AddMeetingImage;
 using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting;
@@ -103,6 +104,20 @@ namespace BT.Api.Controllers
         [Route("join")]
         [Authorize]
         public async Task<IActionResult> Join([FromBody] JoinMeetingCommand command)
+        {
+            await Execute(command);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Add images to meeting
+        /// <param name="command">AddMeetingImageCommand</param> 
+        /// </summary>
+        [HttpPost]
+        [Authorize]
+        [Route("add-images")]
+        public async Task<IActionResult> AddImages([FromForm] AddMeetingImageCommand command)
         {
             await Execute(command);
 

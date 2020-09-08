@@ -41,6 +41,13 @@ namespace BT.Application.Features.AuthFeatures.Commands.Login
                 throw new InvalidPasswordException();
             }
 
+            var isRefreshTokenExists = await _dataContext.RefreshToken.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            
+            if(isRefreshTokenExists != null)
+            {
+                _dataContext.RefreshToken.Remove(isRefreshTokenExists);
+            }
+
             var token = _authTokensService.GenerateToken(user.Id, user.Email.ToLowerInvariant());
 
             var refreshToken = _authTokensService.GenerateRefreshToken(user.Id);

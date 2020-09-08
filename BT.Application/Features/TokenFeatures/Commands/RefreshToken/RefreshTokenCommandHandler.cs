@@ -35,9 +35,13 @@ namespace BT.Application.Features.TokenFeatures.Commands.RefreshToken
                 throw new UserNotFoundException("or token");
             }
 
-            var refreshToken = user.RefreshToken;
+            var refreshToken = await _dataContext.RefreshToken.SingleOrDefaultAsync(x => x.UserId == user.Id);
 
-            if(!refreshToken.IsActive)
+            if (refreshToken != null && refreshToken.IsActive)
+            {
+                _dataContext.RefreshToken.Remove(refreshToken);
+            }
+            else if(!refreshToken.IsActive)
             {
                 throw new TokenException("Refresh token is expired or inactive");
             }

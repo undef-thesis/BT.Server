@@ -16,27 +16,55 @@ namespace BT.Infrastructure.Persistence
         public DbSet<Address> Address { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Avatar> Avatar { get; set; }
+        public DbSet<MeetingImage> MeetingImages { get; set; }
+
+        public DataContext()
+        {
+
+        }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
+
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
             base.OnModelCreating(builder);
 
             builder.Entity<User>()
-                .HasOne<RefreshToken>(x => x.RefreshToken)
+                .HasOne(x => x.RefreshToken)
                 .WithOne(x => x.User)
                 .HasForeignKey<RefreshToken>(x => x.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<User>()
+                .HasOne(x => x.Avatar)
+                .WithOne(x => x.User)
+                .HasForeignKey<Avatar>(x => x.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<User>()
                 .HasMany(x => x.OrganizedMeetings)
                 .WithOne(x => x.MeetingOrganizer)
                 .HasForeignKey(x => x.MeetingOrganizerId);
-                
+
+            builder.Entity<User>()
+                .HasMany(x => x.Comments)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
             builder.Entity<UserMeeting>()
                 .HasKey(x => new { x.UserId, x.MeetingId });
             builder.Entity<UserMeeting>()
@@ -59,15 +87,17 @@ namespace BT.Infrastructure.Persistence
                 .WithOne(x => x.Meeting)
                 .HasForeignKey(x => x.MeetingId);
 
-            builder.Entity<User>()
-                .HasMany(x => x.Comments)
-                .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
+            builder.Entity<Meeting>()
+                .HasMany(x => x.Images)
+                .WithOne(x => x.Meeting)
+                .HasForeignKey(x => x.MeetingId);
 
             builder.Entity<Category>()
                 .HasMany(x => x.Meetings)
                 .WithOne(x => x.Category)
                 .HasForeignKey(x => x.CategoryId);
+
+            builder.Seed();
         }
 
         public async Task<int> SaveChangesAsync()

@@ -12,6 +12,7 @@ namespace BT.Application.Common
            {
                cfg.CreateMap<Meeting, MeetingDto>();
                cfg.CreateMap<Meeting, MeetingDetailsDto>();
+               cfg.CreateMap<MeetingImage, MeetingImageDto>();
                cfg.CreateMap<Address, AddressDto>();
                cfg.CreateMap<Comment, CommentDto>();
                cfg.CreateMap<Category, CategoryDto>();
