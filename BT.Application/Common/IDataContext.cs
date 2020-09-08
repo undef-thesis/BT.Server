@@ -13,6 +13,8 @@ namespace BT.Application.Common
         DbSet<Address> Address { get; set; }
         DbSet<Comment> Comments { get; set; }
         DbSet<Category> Categories { get; set; }
+        DbSet<Avatar> Avatar { get; set; }
+        DbSet<MeetingImage> MeetingImages { get; set; }
         Task<int> SaveChangesAsync();
     }
 }
