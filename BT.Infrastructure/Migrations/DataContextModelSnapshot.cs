@@ -41,8 +41,14 @@ namespace BT.Infrastructure.Migrations
                     b.Property<Guid>("MeetingId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Province")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Range")
+                        .HasColumnType("int");
 
                     b.Property<string>("Street")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -103,38 +109,38 @@ namespace BT.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(2200),
+                            Id = new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(3354),
                             Name = "Basketball",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(2726)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(3843)
                         },
                         new
                         {
-                            Id = new Guid("4288c454-116d-4fac-a1a0-9a662010311e"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3105),
+                            Id = new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4314),
                             Name = "Football",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3129)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4349)
                         },
                         new
                         {
-                            Id = new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3143),
+                            Id = new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4364),
                             Name = "Hokey",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3144)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4365)
                         },
                         new
                         {
-                            Id = new Guid("08942c16-8030-4920-ad64-85474a634973"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3147),
+                            Id = new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4381),
                             Name = "Running",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3148)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4382)
                         },
                         new
                         {
-                            Id = new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3150),
+                            Id = new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4386),
                             Name = "Ski",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3151)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4387)
                         });
                 });
 
@@ -195,6 +201,9 @@ namespace BT.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("ParticipantCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -209,10 +218,10 @@ namespace BT.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9dc55c24-d2db-443d-9b8d-f79e3fbc961d"),
-                            CategoryId = new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(7721),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3966),
+                            Id = new Guid("5ccbb1ca-0a0b-4ee2-a66d-f1c1411a23d2"),
+                            CategoryId = new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(181),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(5459),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -227,16 +236,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 12,
-                            MeetingOrganizerId = new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"),
+                            MeetingOrganizerId = new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"),
                             Name = "Find people to play basketball",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(8011)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(559)
                         },
                         new
                         {
-                            Id = new Guid("55baa25c-1a76-4749-bc3f-935b9dd9d2cc"),
-                            CategoryId = new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9111),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9015),
+                            Id = new Guid("0115c83b-7c52-4944-86f1-cc84c16dc258"),
+                            CategoryId = new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1952),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1747),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -251,16 +261,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 6,
-                            MeetingOrganizerId = new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"),
+                            MeetingOrganizerId = new Guid("10fa020f-0948-4057-b442-70c6f336e273"),
                             Name = "Find 6 guys to our basketball team",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9118)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1967)
                         },
                         new
                         {
-                            Id = new Guid("6dc22a95-7b14-4d5c-84eb-d9698fc9f962"),
-                            CategoryId = new Guid("4288c454-116d-4fac-a1a0-9a662010311e"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9151),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9148),
+                            Id = new Guid("eccc001f-55c0-4b88-b77a-3bf593a420c2"),
+                            CategoryId = new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2008),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2003),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -275,16 +286,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 21,
-                            MeetingOrganizerId = new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"),
+                            MeetingOrganizerId = new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"),
                             Name = "Find friends to casual play",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9153)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2010)
                         },
                         new
                         {
-                            Id = new Guid("d0cf5f72-67ab-479d-9a52-2763e285622f"),
-                            CategoryId = new Guid("4288c454-116d-4fac-a1a0-9a662010311e"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9156),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9154),
+                            Id = new Guid("de2f774f-9d26-4886-8499-9fa4b7620dbc"),
+                            CategoryId = new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2029),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2012),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -299,16 +311,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 3,
-                            MeetingOrganizerId = new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"),
+                            MeetingOrganizerId = new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"),
                             Name = "Footboll tomorrow",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9157)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2031)
                         },
                         new
                         {
-                            Id = new Guid("ae63279e-780c-4576-9f17-04dd29f0c567"),
-                            CategoryId = new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9161),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9159),
+                            Id = new Guid("90418db2-0429-41c8-95b1-88ba140db598"),
+                            CategoryId = new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2036),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2032),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -323,16 +336,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 6,
-                            MeetingOrganizerId = new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"),
+                            MeetingOrganizerId = new Guid("10fa020f-0948-4057-b442-70c6f336e273"),
                             Name = "Find team to game",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9162)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2037)
                         },
                         new
                         {
-                            Id = new Guid("cae59f2f-587f-4f88-8963-61ca0246f9c9"),
-                            CategoryId = new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9165),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9163),
+                            Id = new Guid("a226c49f-ae4e-4170-8302-77aebedfa022"),
+                            CategoryId = new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2042),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2039),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -347,16 +361,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 12,
-                            MeetingOrganizerId = new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"),
+                            MeetingOrganizerId = new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"),
                             Name = "ICE IS COLD. THIS WEEKEND",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9166)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2043)
                         },
                         new
                         {
-                            Id = new Guid("64050891-f745-4c38-9c5d-50a5ea81f2ed"),
-                            CategoryId = new Guid("08942c16-8030-4920-ad64-85474a634973"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9170),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9167),
+                            Id = new Guid("1d8fab4f-2a9b-47d2-ae00-9c09de237f83"),
+                            CategoryId = new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2058),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2045),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -371,16 +386,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 2,
-                            MeetingOrganizerId = new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"),
+                            MeetingOrganizerId = new Guid("10fa020f-0948-4057-b442-70c6f336e273"),
                             Name = "Find somebody to running together",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9171)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2059)
                         },
                         new
                         {
-                            Id = new Guid("f4862ae4-5f07-4aa3-843f-092616a5b677"),
-                            CategoryId = new Guid("08942c16-8030-4920-ad64-85474a634973"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9174),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9172),
+                            Id = new Guid("efd637ec-4458-4154-9b49-e3b182543950"),
+                            CategoryId = new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2064),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2061),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -395,16 +411,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 100,
-                            MeetingOrganizerId = new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"),
+                            MeetingOrganizerId = new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"),
                             Name = "Marathon",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9175)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2065)
                         },
                         new
                         {
-                            Id = new Guid("8c405e97-e3e9-4170-915e-e922913b3c99"),
-                            CategoryId = new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9185),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9176),
+                            Id = new Guid("d41c6422-33b1-4ab9-b9b5-c43a89ca4421"),
+                            CategoryId = new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2070),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2067),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -419,16 +436,17 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 1,
-                            MeetingOrganizerId = new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"),
+                            MeetingOrganizerId = new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"),
                             Name = "Ski in Tatry",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9186)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2072)
                         },
                         new
                         {
-                            Id = new Guid("361d0fb2-7927-4338-8861-976e9a186be8"),
-                            CategoryId = new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9190),
-                            Date = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9187),
+                            Id = new Guid("56b39e65-217a-42a2-80d4-86686beaeb00"),
+                            CategoryId = new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2076),
+                            Date = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2073),
                             Description = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
@@ -443,9 +461,10 @@ namespace BT.Infrastructure.Migrations
             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
             varius justo. Nam finibus fringilla leo eu lacinia.",
                             MaxParticipants = 12,
-                            MeetingOrganizerId = new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"),
+                            MeetingOrganizerId = new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"),
                             Name = "Ski next winter group",
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9190)
+                            ParticipantCount = 0,
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2078)
                         });
                 });
 
@@ -534,80 +553,80 @@ namespace BT.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5196),
+                            Id = new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(2696),
                             Email = "admin@bt.com",
                             Firstname = "Aleksaner",
                             Lastname = "Ciechanowski",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5544)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(3403)
                         },
                         new
                         {
-                            Id = new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5924),
+                            Id = new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4073),
                             Email = "admin1@bt.com",
                             Firstname = "Donald",
                             Lastname = "Lukaszenka",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5936)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4089)
                         },
                         new
                         {
-                            Id = new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5953),
+                            Id = new Guid("10fa020f-0948-4057-b442-70c6f336e273"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4109),
                             Email = "admin2@bt.com",
                             Firstname = "Andrzej",
                             Lastname = "Kaczynski",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5954)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4111)
                         },
                         new
                         {
-                            Id = new Guid("bb5cc0d6-40ec-44ab-9264-9ed9715dfbc4"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6163),
+                            Id = new Guid("b2131cb2-ec73-470d-bba5-0a350c3c64b4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4406),
                             Email = "btmail@bt.com",
                             Firstname = "Jack",
                             Lastname = "Nowak",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6164)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4407)
                         },
                         new
                         {
-                            Id = new Guid("7168be64-1ad5-4579-b8a9-77362ef23c34"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6178),
+                            Id = new Guid("05ac4842-73f2-47f9-8bc5-ddc2baf26e21"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4411),
                             Email = "btmail1@bt.com",
                             Firstname = "George",
                             Lastname = "Bush",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6179)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4412)
                         },
                         new
                         {
-                            Id = new Guid("a837f857-7848-492d-96a6-b06ce9f66a5e"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6181),
+                            Id = new Guid("77525bc2-3b61-4e1f-ac07-5ad1a8d9fbf1"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4415),
                             Email = "btmail2@bt.com",
                             Firstname = "Alina",
                             Lastname = "Ivanov",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6182)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4416)
                         },
                         new
                         {
-                            Id = new Guid("6a01ca03-2dde-4287-8e9e-19c24c17507f"),
-                            CreatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6185),
+                            Id = new Guid("1022fd8f-28fd-46c4-88d4-00924f4c99b4"),
+                            CreatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4420),
                             Email = "btmail3@bt.com",
                             Firstname = "Ksenya",
                             Lastname = "Barbie",
                             Password = "123456",
                             Salt = new byte[] { 98, 116, 45, 115, 97, 108, 116 },
-                            UpdatedAt = new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6186)
+                            UpdatedAt = new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4421)
                         });
                 });
 
@@ -695,7 +714,7 @@ namespace BT.Infrastructure.Migrations
             modelBuilder.Entity("BT.Domain.Domain.UserMeeting", b =>
                 {
                     b.HasOne("BT.Domain.Domain.Meeting", "Meeting")
-                        .WithMany("Partcipants")
+                        .WithMany("Participants")
                         .HasForeignKey("MeetingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

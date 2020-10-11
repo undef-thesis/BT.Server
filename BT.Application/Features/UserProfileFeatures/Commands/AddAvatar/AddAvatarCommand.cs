@@ -6,6 +6,8 @@ namespace BT.Application.Features.UserProfileFeatures.Commands.AddAvatar
 {
     public class AddAvatarCommand : AuthRequest, IRequest
     {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public IFormFile Avatar { get; set; }
     }
 }

@@ -58,7 +58,6 @@ namespace BT.Infrastructure.Config
                 x.DocExpansion(DocExpansion.None);
                 x.EnableDeepLinking();
                 x.EnableFilter();
-                x.MaxDisplayedTags(5);
                 x.ShowExtensions();
                 x.ShowCommonExtensions();
                 x.EnableValidator();

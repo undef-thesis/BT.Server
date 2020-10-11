@@ -34,10 +34,13 @@ namespace BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting
                 throw new CategoryNotFoundException();
             }
 
+            category = await _dataContext.Categories.SingleOrDefaultAsync(x => x.Id == command.CategoryId);
+
+
             meeting.UpdateMeeting(command.Name, command.Description, command.MaxParticipants, command.Date);
-            address.UpdateAddress(command.Latitude, command.Longitude, command.Country, 
-                command.Province, command.City, command.Street);
-            category.UpdateCategory(command.Category.ToLowerInvariant());
+            address.UpdateAddress(command.Latitude, command.Longitude, command.Range, command.Country, 
+                command.PostalCode, command.Province, command.City, command.Street);
+            category.UpdateCategory(category.Name);
 
             _dataContext.Meetings.Update(meeting);
             _dataContext.Address.Update(address);

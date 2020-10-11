@@ -18,10 +18,12 @@ namespace BT.Infrastructure.Persistence
         public DbSet<Category> Categories { get; set; }
         public DbSet<Avatar> Avatar { get; set; }
         public DbSet<MeetingImage> MeetingImages { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public DataContext()
         {
-
+            // dotnet ef migrations add init
+            // dotnet ef database update
         }
 
         public DataContext(DbContextOptions<DataContext> options)
@@ -73,7 +75,7 @@ namespace BT.Infrastructure.Persistence
                 .HasForeignKey(x => x.UserId);
             builder.Entity<UserMeeting>()
                 .HasOne(x => x.Meeting)
-                .WithMany(x => x.Partcipants)
+                .WithMany(x => x.Participants)
                 .HasForeignKey(x => x.MeetingId);
 
             builder.Entity<Meeting>()

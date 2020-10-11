@@ -4,7 +4,6 @@ using BT.Infrastructure.Config;
 using BT.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +14,8 @@ using FluentValidation.AspNetCore;
 using BT.Application.Validators;
 using BT.Application.Options;
 using BT.Application.Features.Behaviours;
+using System.Text;
+using BT.Application.Services.Image;
 
 namespace BT.Api
 {
@@ -34,6 +35,7 @@ namespace BT.Api
             services.AddScoped<IAuthTokenService, AuthTokenService>();
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IAuthTokenCache, AuthTokenCache>();
+            services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IDataContext, DataContext>();
 
             services.AddDbContext<DataContext>();
@@ -62,6 +64,8 @@ namespace BT.Api
             services.SetupValidators();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             services.AddControllers()
                 .AddFluentValidation()

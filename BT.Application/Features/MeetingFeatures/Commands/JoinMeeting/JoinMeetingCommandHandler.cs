@@ -37,10 +37,20 @@ namespace BT.Application.Features.MeetingFeatures.Commands.JoinMeeting
 
             var isUserEnrolled = user.EnrolledMeetings.SingleOrDefault(x => x.UserId == command.UserId);
 
+            // TODO: return error???
             if (isUserEnrolled != null)
             {
-                throw new UserAlreadyBelongsToTheMeetingException();
+                return Unit.Value;
+                //throw new UserAlreadyBelongsToTheMeetingException();
             }
+
+            if (meeting.ParticipantCount == meeting.MaxParticipants)
+            {
+                //throw new MeetingHasNotFreeSlotsException();
+                return Unit.Value;
+            }
+
+            meeting.AddParticipantToCounter();
 
             var userMeeting = new UserMeeting(user.Id, user, meeting.Id, meeting);
 

@@ -13,10 +13,12 @@ namespace BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting
         public DateTime Date { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public int Range { get; set; }
         public string Country { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public string Category { get; set; }
+        public string PostalCode { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

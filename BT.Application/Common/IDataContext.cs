@@ -15,6 +15,7 @@ namespace BT.Application.Common
         DbSet<Category> Categories { get; set; }
         DbSet<Avatar> Avatar { get; set; }
         DbSet<MeetingImage> MeetingImages { get; set; }
+        DbSet<City> Cities { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

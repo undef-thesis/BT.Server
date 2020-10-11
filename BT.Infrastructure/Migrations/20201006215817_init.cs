@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BT.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,6 +66,7 @@ namespace BT.Infrastructure.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    ParticipantCount = table.Column<int>(nullable: false),
                     MaxParticipants = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
@@ -119,10 +120,12 @@ namespace BT.Infrastructure.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
+                    Range = table.Column<int>(nullable: false),
                     Country = table.Column<string>(nullable: true),
                     Province = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     MeetingId = table.Column<Guid>(nullable: false)
@@ -215,11 +218,11 @@ namespace BT.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(2200), "Basketball", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(2726) },
-                    { new Guid("4288c454-116d-4fac-a1a0-9a662010311e"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3105), "Football", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3129) },
-                    { new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3143), "Hokey", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3144) },
-                    { new Guid("08942c16-8030-4920-ad64-85474a634973"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3147), "Running", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3148) },
-                    { new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3150), "Ski", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3151) }
+                    { new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(3354), "Basketball", new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(3843) },
+                    { new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4314), "Football", new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4349) },
+                    { new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4364), "Hokey", new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4365) },
+                    { new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4381), "Running", new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4382) },
+                    { new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4386), "Ski", new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(4387) }
                 });
 
             migrationBuilder.InsertData(
@@ -227,21 +230,21 @@ namespace BT.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Email", "Firstname", "Lastname", "Password", "Salt", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5196), "admin@bt.com", "Aleksaner", "Ciechanowski", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5544) },
-                    { new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5924), "admin1@bt.com", "Donald", "Lukaszenka", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5936) },
-                    { new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5953), "admin2@bt.com", "Andrzej", "Kaczynski", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(5954) },
-                    { new Guid("bb5cc0d6-40ec-44ab-9264-9ed9715dfbc4"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6163), "btmail@bt.com", "Jack", "Nowak", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6164) },
-                    { new Guid("7168be64-1ad5-4579-b8a9-77362ef23c34"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6178), "btmail1@bt.com", "George", "Bush", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6179) },
-                    { new Guid("a837f857-7848-492d-96a6-b06ce9f66a5e"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6181), "btmail2@bt.com", "Alina", "Ivanov", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6182) },
-                    { new Guid("6a01ca03-2dde-4287-8e9e-19c24c17507f"), new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6185), "btmail3@bt.com", "Ksenya", "Barbie", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 9, 8, 20, 26, 24, 835, DateTimeKind.Utc).AddTicks(6186) }
+                    { new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(2696), "admin@bt.com", "Aleksaner", "Ciechanowski", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(3403) },
+                    { new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4073), "admin1@bt.com", "Donald", "Lukaszenka", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4089) },
+                    { new Guid("10fa020f-0948-4057-b442-70c6f336e273"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4109), "admin2@bt.com", "Andrzej", "Kaczynski", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4111) },
+                    { new Guid("b2131cb2-ec73-470d-bba5-0a350c3c64b4"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4406), "btmail@bt.com", "Jack", "Nowak", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4407) },
+                    { new Guid("05ac4842-73f2-47f9-8bc5-ddc2baf26e21"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4411), "btmail1@bt.com", "George", "Bush", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4412) },
+                    { new Guid("77525bc2-3b61-4e1f-ac07-5ad1a8d9fbf1"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4415), "btmail2@bt.com", "Alina", "Ivanov", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4416) },
+                    { new Guid("1022fd8f-28fd-46c4-88d4-00924f4c99b4"), new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4420), "btmail3@bt.com", "Ksenya", "Barbie", "123456", new byte[] { 98, 116, 45, 115, 97, 108, 116 }, new DateTime(2020, 10, 6, 21, 58, 16, 451, DateTimeKind.Utc).AddTicks(4421) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Meetings",
-                columns: new[] { "Id", "CategoryId", "CreatedAt", "Date", "Description", "MaxParticipants", "MeetingOrganizerId", "Name", "UpdatedAt" },
+                columns: new[] { "Id", "CategoryId", "CreatedAt", "Date", "Description", "MaxParticipants", "MeetingOrganizerId", "Name", "ParticipantCount", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("9dc55c24-d2db-443d-9b8d-f79e3fbc961d"), new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(7721), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(3966), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    { new Guid("5ccbb1ca-0a0b-4ee2-a66d-f1c1411a23d2"), new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(181), new DateTime(2020, 10, 6, 21, 58, 16, 453, DateTimeKind.Utc).AddTicks(5459), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -253,8 +256,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"), "Find people to play basketball", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(8011) },
-                    { new Guid("d0cf5f72-67ab-479d-9a52-2763e285622f"), new Guid("4288c454-116d-4fac-a1a0-9a662010311e"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9156), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9154), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"), "Find people to play basketball", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(559) },
+                    { new Guid("de2f774f-9d26-4886-8499-9fa4b7620dbc"), new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2029), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2012), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -266,8 +269,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 3, new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"), "Footboll tomorrow", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9157) },
-                    { new Guid("f4862ae4-5f07-4aa3-843f-092616a5b677"), new Guid("08942c16-8030-4920-ad64-85474a634973"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9174), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9172), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 3, new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"), "Footboll tomorrow", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2031) },
+                    { new Guid("efd637ec-4458-4154-9b49-e3b182543950"), new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2064), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2061), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -279,8 +282,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 100, new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"), "Marathon", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9175) },
-                    { new Guid("8c405e97-e3e9-4170-915e-e922913b3c99"), new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9185), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9176), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 100, new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"), "Marathon", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2065) },
+                    { new Guid("d41c6422-33b1-4ab9-b9b5-c43a89ca4421"), new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2070), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2067), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -292,8 +295,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 1, new Guid("83b66e4c-792e-444c-b17b-861bf6a8a996"), "Ski in Tatry", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9186) },
-                    { new Guid("6dc22a95-7b14-4d5c-84eb-d9698fc9f962"), new Guid("4288c454-116d-4fac-a1a0-9a662010311e"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9151), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9148), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 1, new Guid("b23033ad-a3b6-41fd-9273-0a8add33990a"), "Ski in Tatry", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2072) },
+                    { new Guid("eccc001f-55c0-4b88-b77a-3bf593a420c2"), new Guid("51771ba3-80f5-45e2-9bda-6d9cc3b939f6"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2008), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2003), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -305,8 +308,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 21, new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"), "Find friends to casual play", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9153) },
-                    { new Guid("cae59f2f-587f-4f88-8963-61ca0246f9c9"), new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9165), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9163), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 21, new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"), "Find friends to casual play", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2010) },
+                    { new Guid("a226c49f-ae4e-4170-8302-77aebedfa022"), new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2042), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2039), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -318,8 +321,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"), "ICE IS COLD. THIS WEEKEND", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9166) },
-                    { new Guid("361d0fb2-7927-4338-8861-976e9a186be8"), new Guid("13e15e4d-c673-44a9-bc3f-c4a290f44c50"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9190), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9187), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"), "ICE IS COLD. THIS WEEKEND", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2043) },
+                    { new Guid("56b39e65-217a-42a2-80d4-86686beaeb00"), new Guid("e5db81e8-61b2-4323-b32a-4afe91e890d4"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2076), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2073), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -331,8 +334,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("780191e1-b21c-4af0-9eba-1a0975573c9e"), "Ski next winter group", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9190) },
-                    { new Guid("55baa25c-1a76-4749-bc3f-935b9dd9d2cc"), new Guid("a7620c03-5ec6-48e8-823d-556fb754fadc"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9111), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9015), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 12, new Guid("6fe8e178-20a8-4be7-92b0-70db4e6d39c4"), "Ski next winter group", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2078) },
+                    { new Guid("0115c83b-7c52-4944-86f1-cc84c16dc258"), new Guid("1f70d917-509b-4203-a9a7-a195f01c1ca1"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1952), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1747), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -344,8 +347,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 6, new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"), "Find 6 guys to our basketball team", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9118) },
-                    { new Guid("ae63279e-780c-4576-9f17-04dd29f0c567"), new Guid("35a2cb97-aa21-4c16-9b5b-e7b31e648d1d"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9161), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9159), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 6, new Guid("10fa020f-0948-4057-b442-70c6f336e273"), "Find 6 guys to our basketball team", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(1967) },
+                    { new Guid("90418db2-0429-41c8-95b1-88ba140db598"), new Guid("619b475a-81d4-4c55-8e48-2349bac9a37f"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2036), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2032), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -357,8 +360,8 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 6, new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"), "Find team to game", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9162) },
-                    { new Guid("64050891-f745-4c38-9c5d-50a5ea81f2ed"), new Guid("08942c16-8030-4920-ad64-85474a634973"), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9170), new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9167), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 6, new Guid("10fa020f-0948-4057-b442-70c6f336e273"), "Find team to game", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2037) },
+                    { new Guid("1d8fab4f-2a9b-47d2-ae00-9c09de237f83"), new Guid("f16d8ed3-d085-4eaf-8071-f71332d49f80"), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2058), new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2045), @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                             Duis semper purus venenatis diam pulvinar, vitae porttitor sem ornare. Vivamus interdum viverra
                             mattis. Proin sodales neque massa, et pulvinar lectus accumsan non. Mauris blandit, mi vel 
                             facilisis posuere, quam mauris rutrum est, nec auctor lorem libero pretium elit. Nunc hendrerit 
@@ -370,7 +373,7 @@ namespace BT.Infrastructure.Migrations
                             Proin sed nisi tempus, placerat nisi at, imperdiet libero. Suspendisse sollicitudin risus ante, eget rutrum 
                             dui sagittis et. Maecenas commodo sagittis ligula, vitae fringilla ligula mollis sit amet. In hac habitasse 
                             platea dictumst. Suspendisse vehicula nulla luctus, mollis risus id, consectetur libero. Integer interdum 
-                            varius justo. Nam finibus fringilla leo eu lacinia.", 2, new Guid("1a332175-00c6-4a12-ab53-2e8389927ca1"), "Find somebody to running together", new DateTime(2020, 9, 8, 20, 26, 24, 837, DateTimeKind.Utc).AddTicks(9171) }
+                            varius justo. Nam finibus fringilla leo eu lacinia.", 2, new Guid("10fa020f-0948-4057-b442-70c6f336e273"), "Find somebody to running together", 0, new DateTime(2020, 10, 6, 21, 58, 16, 454, DateTimeKind.Utc).AddTicks(2059) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -31,7 +31,7 @@ namespace BT.Application.Features.UserProfileFeatures.Commands.AddAvatar
 
             if(avatar != null)
             {
-                throw new System.Exception("User can not have 2 avatars");
+                _dataContext.Avatar.Remove(avatar);
             }
 
             byte[] imageData = null;    

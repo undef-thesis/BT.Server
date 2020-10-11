@@ -6,9 +6,11 @@ using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting;
 using BT.Application.Features.MeetingFeatures.Queries.GetEnrolledMeetings;
+using BT.Application.Features.MeetingFeatures.Queries.GetFilteredMeetings;
 using BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails;
 using BT.Application.Features.MeetingFeatures.Queries.GetMeetings;
 using BT.Application.Features.MeetingFeatures.Queries.GetOrganizedMeetings;
+using BT.Application.Features.MeetingFeatures.Queries.SearchMeetings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -75,9 +77,47 @@ namespace BT.Api.Controllers
         [Route("enrolled")]
         public async Task<IActionResult> GetEnrolled()
         {
-            var ExecutedMeetings = await Execute(new GetEnrolledMeetingsQuery());
+            var enrolledMeetings = await Execute(new GetEnrolledMeetingsQuery());
 
-            return Ok(ExecutedMeetings);
+            return Ok(enrolledMeetings);
+        }
+
+        /// <summary>
+        /// Get filtered meetings
+        /// </summary>
+        /// <returns>Return MeetingsDto</returns>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("filter")]
+        public async Task<IActionResult> GetFiltered([FromQuery] string city, [FromQuery] string country, [FromQuery] Guid categoryId)
+        {
+            var filteredMeetings = await Execute(new GetFilteredMeetingsQuery
+            {
+                City = city ?? String.Empty,
+                Country = country ?? String.Empty,
+                CategoryId = !string.IsNullOrEmpty(categoryId.ToString()) ? categoryId : Guid.Empty
+            });
+
+            return Ok(filteredMeetings);
+        }
+
+        /// <summary>
+        /// Search meetings
+        /// </summary>
+        /// <returns>Return MeetingsDto</returns>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("search")]
+        public async Task<IActionResult> Search([FromQuery] string city, [FromQuery] string country, [FromQuery] string term)
+        {
+            var searchedMeetings = await Execute(new SearchMeetingsQuery
+            {
+                Term = term ?? String.Empty,
+                City = city ?? String.Empty,
+                Country = country ?? String.Empty
+            });
+
+            return Ok(searchedMeetings);
         }
 
         /// <summary>
@@ -88,7 +128,7 @@ namespace BT.Api.Controllers
         [HttpPost]
         [Route("")]
         [Authorize]
-        public async Task<IActionResult> Create([FromBody] AddMeetingCommand command)
+        public async Task<IActionResult> Create([FromForm] AddMeetingCommand command)
         {
             await Execute(command);
 
