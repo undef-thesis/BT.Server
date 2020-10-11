@@ -8,6 +8,7 @@ namespace BT.Domain.Domain
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
+        public int ParticipantCount { get; protected set; }
         public int MaxParticipants { get; protected set; }
         public DateTime Date { get; protected set; }
         public DateTime CreatedAt { get; private set; }
@@ -15,7 +16,7 @@ namespace BT.Domain.Domain
         public Guid MeetingOrganizerId { get; private set; }
         public User MeetingOrganizer { get; private set; }
         public Address Address { get; private set; }
-        public ICollection<UserMeeting> Partcipants { get; private set; }
+        public ICollection<UserMeeting> Participants { get; private set; }
         public ICollection<Comment> Comments { get; private set; }
         public Guid CategoryId { get; private set; }
         public Category Category { get; private set; }
@@ -44,6 +45,11 @@ namespace BT.Domain.Domain
             MaxParticipants = maxParticipants;
             Date = date;
             UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void AddParticipantToCounter() 
+        {
+            ParticipantCount++;
         }
     }
 }
