@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Threading;
 using BT.Application.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BT.Application.Features.UserProfileFeatures.Queries.GetUserProfile
 {
@@ -16,7 +15,7 @@ namespace BT.Application.Features.UserProfileFeatures.Queries.GetUserProfile
         {
             _dataContext = dataContext;
         }
-        
+
         public async Task<UserPofileDto> Handle(GetUserProfileQuery query, CancellationToken cancellationToken)
         {
             var user = await _dataContext.Users.Include(x => x.Avatar).SingleOrDefaultAsync(x => x.Id == query.UserId);
@@ -25,7 +24,7 @@ namespace BT.Application.Features.UserProfileFeatures.Queries.GetUserProfile
             {
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
-                Avatar = user.Avatar.Picture
+                Avatar = user.Avatar?.Picture ?? null
             };
 
             return userProfleDto;

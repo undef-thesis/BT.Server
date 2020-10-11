@@ -21,13 +21,18 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetings
             _dataContext = dataContext;
             _mapper = mapper;
         }
-        
+
         public async Task<IEnumerable<MeetingDto>> Handle(GetMeetingsQuery query, CancellationToken cancellationToken)
         {
             var meetings = await _dataContext.Meetings.Include(x => x.Category)
                 .Where(x => x.Address.City == query.City).ToListAsync();
 
-            var mapped = _mapper.Map <IEnumerable<Meeting>, IEnumerable<MeetingDto>>(meetings);
+            if (meetings is null)
+            {
+                meetings = await _dataContext.Meetings.ToListAsync();
+            }
+
+            var mapped = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingDto>>(meetings);
 
             return mapped;
         }

@@ -10,12 +10,14 @@ namespace BT.Application.Common
         {
             var config = new MapperConfiguration(cfg =>
            {
-               cfg.CreateMap<Meeting, MeetingDto>();
-               cfg.CreateMap<Meeting, MeetingDetailsDto>();
-               cfg.CreateMap<MeetingImage, MeetingImageDto>();
-               cfg.CreateMap<Address, AddressDto>();
-               cfg.CreateMap<Comment, CommentDto>();
-               cfg.CreateMap<Category, CategoryDto>();
+                cfg.CreateMap<Meeting, MeetingDto>();
+                cfg.CreateMap<Meeting, MeetingDetailsDto>();
+                cfg.CreateMap<MeetingImage, MeetingImageDto>();
+                cfg.CreateMap<Address, AddressDto>();
+                cfg.CreateMap<Comment, CommentDto>();
+                cfg.CreateMap<Category, CategoryDto>();
+                cfg.CreateMap<User, UserPofileDto>();
+                cfg.CreateMap<City, CityDto>();
            })
             .CreateMapper();
 

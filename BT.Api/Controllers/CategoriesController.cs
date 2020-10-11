@@ -14,7 +14,7 @@ namespace BT.Api.Controllers
         /// </summary>
         /// <returns>CategoriesDto</returns>
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         [Route("")]
         public async Task<IActionResult> GetCategories()
         {

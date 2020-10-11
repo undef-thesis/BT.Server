@@ -23,8 +23,10 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails
 
         public async Task<MeetingDetailsDto> Handle(GetMeetingDetailsQuery query, CancellationToken cancellationToken)
         {
-            var meetingDetails = await _dataContext.Meetings.Include(x => x.Address)
-                .Include(x => x.Comments).Include(x => x.Category).Include(x => x.Images)
+            var meetingDetails = await _dataContext.Meetings
+                .Include(x => x.Address).Include(x => x.Comments)
+                .Include(x => x.Category).Include(x => x.Images)
+                .Include(x => x.MeetingOrganizer)
                 .SingleOrDefaultAsync(x => x.Id == query.Id);
 
             if (meetingDetails is null)
