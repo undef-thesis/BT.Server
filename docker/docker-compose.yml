@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  dotnet-app:
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    build:
+      dockerfile: ./Dockerfile
+      network: host
+      context: ./
+    volumes:
+      - ./../:/var/www/
+    hostname: dotnet-app
+    container_name: dotnet-app
+    working_dir: /var/www/BT.Api
+    ports:
+      - '127.0.0.1:5001:5000'

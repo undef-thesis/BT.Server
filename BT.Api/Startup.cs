@@ -16,6 +16,7 @@ using BT.Application.Options;
 using BT.Application.Features.Behaviours;
 using System.Text;
 using BT.Application.Services.Image;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace BT.Api
 {
@@ -58,7 +59,10 @@ namespace BT.Api
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:4200");
+                    .WithOrigins("http://localhost:4200", "http://192.168.137.1:8080",
+                        "https://bt.aleksanderszatko.com",
+                        "https://www.bt.aleksanderszatko.com",
+                        "www.bt.aleksanderszatko.com");
             }));
 
             services.SetupValidators();
@@ -80,6 +84,7 @@ namespace BT.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("CorsPolicy");
