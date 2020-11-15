@@ -17,6 +17,7 @@ using BT.Application.Features.Behaviours;
 using System.Text;
 using BT.Application.Services.Image;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 
 namespace BT.Api
 {
