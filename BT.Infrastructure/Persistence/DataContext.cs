@@ -37,7 +37,7 @@ namespace BT.Infrastructure.Persistence
             if (!optionsBuilder.IsConfigured)
             {
                 // optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
-                optionsBuilder.UseNpgsql("Host=app-2fc35c64-442f-406b-b2db-9ed58ea7253c-do-user-7336880-0.b.db.ondigitalocean.com;Port=25060;Database=db;Username=db;Password=e3fs6peuckz8rr9h;SslMode=Require;");
+                optionsBuilder.UseNpgsql("Host=app-2fc35c64-442f-406b-b2db-9ed58ea7253c-do-user-7336880-0.b.db.ondigitalocean.com;Port=25060;Database=db;Username=db;Password=e3fs6peuckz8rr9h;SslMode=Require;Trust Server Certificate=true;");
             }
         }
 
