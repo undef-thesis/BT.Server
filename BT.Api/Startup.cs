@@ -39,8 +39,8 @@ namespace BT.Api
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IDataContext, DataContext>();
 
-            services.AddDbContext<DataContext>();
-
+            // services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
             services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
             services.AddSingleton(AutoMapperConfig.Initialize());

@@ -34,10 +34,10 @@ namespace BT.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
-            }
+            // if (!optionsBuilder.IsConfigured)
+            // {
+            //     optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
+            // }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
