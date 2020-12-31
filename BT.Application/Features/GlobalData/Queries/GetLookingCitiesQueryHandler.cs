@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,22 +26,11 @@ namespace BT.Application.Features.GlobalData.Queries
 
         public async Task<IEnumerable<CityDto>> Handle(GetLookingCitiesQuery query, CancellationToken cancellationToken)
         {
-            var cities = await _dataContext.Cities.ToListAsync();
-            var matchedCities = new List<City>();
-
-            Regex word = new Regex($"{query.LookingCity.ToLowerInvariant()}.*");
-
-            foreach(var city in cities)
-            {
-                Match match = word.Match(city.Name.ToLowerInvariant());
-
-                if(!String.IsNullOrEmpty(match.Value))
-                {
-                    matchedCities.Add(city);
-                }
-            }
-
-            var mapped = _mapper.Map<IEnumerable<City>, IEnumerable<CityDto>>(matchedCities);
+            var cities = await _dataContext.Cities.Where(
+                x => x.Name.ToLower().Contains(query.LookingCity.ToLower()))
+                .ToListAsync();
+           
+            var mapped = _mapper.Map<IEnumerable<City>, IEnumerable<CityDto>>(cities);
             return mapped;
         }
     }

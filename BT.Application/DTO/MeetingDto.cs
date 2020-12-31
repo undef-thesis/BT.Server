@@ -14,6 +14,7 @@ namespace BT.Application.DTO
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public CategoryDto Category { get; set; }
+        public AddressDto Address { get; set; }
         public ICollection<MeetingImageDto> Images { get; set; }
     }
 }

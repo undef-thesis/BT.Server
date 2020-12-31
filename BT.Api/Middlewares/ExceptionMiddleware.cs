@@ -33,19 +33,23 @@ namespace BT.Api.Middlewares
         {
             var response = context.Response;
             response.ContentType = "application/json";
-            
+
             var code = (int)HttpStatusCode.InternalServerError;
 
-            if(ex is UserNotFoundException)
+            if (ex is UserNotFoundException)
                 code = (int)HttpStatusCode.NotFound;
-            else if(ex is TokenException)
+            else if (ex is TokenException)
                 code = (int)HttpStatusCode.UnprocessableEntity;
-            else if(ex is UserAlreadyExistsException)
+            else if (ex is UserAlreadyExistsException)
                 code = (int)HttpStatusCode.UnprocessableEntity;
             else if (ex is InvalidPasswordException)
                 code = (int)HttpStatusCode.Forbidden;
-            else if(ex is MeetingNotFoundException)
+            else if (ex is MeetingNotFoundException)
                 code = (int)HttpStatusCode.NotFound;
+            else if (ex is UserAlreadyBelongsToTheMeetingException)
+                code = (int)HttpStatusCode.Conflict;
+            else if (ex is MeetingHasNotFreeSlotsException)
+                code = (int)HttpStatusCode.Conflict;
 
             response.StatusCode = code;
 

@@ -5,6 +5,7 @@ using BT.Application.Features.MeetingFeatures.Commands.AddMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting;
+using BT.Application.Features.UserProfileFeatures.Commands.ChangePassword;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,8 @@ namespace BT.Application.Validators
             services.AddTransient<IValidator<UpdateMeetingCommand>, UpdateMeetingCommandValidator>();
 
             services.AddTransient<IValidator<AddCommentCommand>, AddCommentCommandValidator>();
+
+            services.AddTransient<IValidator<ChangePasswordCommand>, ChangePasswordCommandValidator>();
         }
     }
 }

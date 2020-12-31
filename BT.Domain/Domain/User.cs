@@ -19,8 +19,8 @@ namespace BT.Domain.Domain
         public ICollection<Comment> Comments { get; private set; }
         public Avatar Avatar { get; set; }
 
-        protected User() {}
-        
+        protected User() { }
+
         public User(string email, string firstName, string lastName, string password, byte[] salt)
         {
             Id = Guid.NewGuid();
@@ -31,6 +31,12 @@ namespace BT.Domain.Domain
             Salt = salt;
 
             CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetPassword(string newPassword)
+        {
+            Password = newPassword;
             UpdatedAt = DateTime.UtcNow;
         }
     }

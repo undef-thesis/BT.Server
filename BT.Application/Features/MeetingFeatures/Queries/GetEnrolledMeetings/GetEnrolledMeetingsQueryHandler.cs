@@ -32,16 +32,14 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetEnrolledMeetings
                 throw new UserNotFoundException();
             }
 
-            var userMeetings = await _dataContext.Users.Include(x => x.EnrolledMeetings)
-                .ThenInclude(x => x.Meeting).SingleOrDefaultAsync(x => x.Id == query.UserId);
+            var meetings = await _dataContext.Meetings.Include(x => x.Category).Include(x => x.Images).Include(x => x.Participants)
+                .Where(x => x.Participants.Any(y => y.UserId == user.Id)).ToListAsync();
 
-            var meetings = userMeetings.EnrolledMeetings.Select(x => x.Meeting).ToList();
-
-            if(meetings is null)
+            if (meetings is null)
             {
                 throw new MeetingNotFoundException();
             }
-            
+
             var mapped = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingDto>>(meetings);
 
             return mapped;

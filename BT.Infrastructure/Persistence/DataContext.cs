@@ -36,8 +36,8 @@ namespace BT.Infrastructure.Persistence
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // optionsBuilder.UseMySql("Server=pl2.sohost.pl;Port=3306;Database=so1056_bt;Uid=so1056_bt;Pwd=vehnu9-Hijmib-sutquk;");
-                optionsBuilder.UseNpgsql("Host=app-2fc35c64-442f-406b-b2db-9ed58ea7253c-do-user-7336880-0.b.db.ondigitalocean.com;Port=25060;Database=db;Username=db;Password=e3fs6peuckz8rr9h;SslMode=Require;Trust Server Certificate=true;");
+                optionsBuilder.UseMySql("Server=db-mysql-fra1-62583-do-user-7336880-0.b.db.ondigitalocean.com;Port=25060;Database=bt-db;Uid=doadmin;Pwd=zje8gvi723mc2ker;SslMode=Preferred;");
+                //optionsBuilder.UseNpgsql("Host=app-21e6a2a8-4bea-4aed-ab3d-693ffaf758ca-do-user-7336880-0.b.db.ondigitalocean.com;Port=25060;Database=bt-db;Username=bt-db;Password=dcnbw8g4zxgwzk5t;SslMode=Require;Trust Server Certificate=true;");
             }
         }
 
@@ -50,23 +50,25 @@ namespace BT.Infrastructure.Persistence
                 .HasOne(x => x.RefreshToken)
                 .WithOne(x => x.User)
                 .HasForeignKey<RefreshToken>(x => x.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<User>()
                 .HasOne(x => x.Avatar)
                 .WithOne(x => x.User)
                 .HasForeignKey<Avatar>(x => x.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<User>()
                 .HasMany(x => x.OrganizedMeetings)
                 .WithOne(x => x.MeetingOrganizer)
-                .HasForeignKey(x => x.MeetingOrganizerId);
+                .HasForeignKey(x => x.MeetingOrganizerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<User>()
                 .HasMany(x => x.Comments)
                 .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<UserMeeting>()
                 .HasKey(x => new { x.UserId, x.MeetingId });

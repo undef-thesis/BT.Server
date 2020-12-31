@@ -3,7 +3,6 @@ services:
   dotnet-app:
     dns:
       - 8.8.8.8
-      - 8.8.4.4
     build:
       dockerfile: ./Dockerfile
       network: host

@@ -20,34 +20,33 @@ namespace BT.Application.Features.MeetingFeatures.Commands.JoinMeeting
 
         public async Task<Unit> Handle(JoinMeetingCommand command, CancellationToken cancellationToken)
         {
-            var user = await _dataContext.Users.Include(x => x.EnrolledMeetings)
-                .ThenInclude(x => x.Meeting).SingleOrDefaultAsync(x => x.Id == command.UserId);
+            var user = await _dataContext.Users.SingleOrDefaultAsync(x => x.Id == command.UserId);
 
             if (user is null)
             {
                 throw new UserNotFoundException();
             }
 
-            var meeting = await _dataContext.Meetings.SingleOrDefaultAsync(x => x.Id == command.Id);
+            var meeting = await _dataContext.Meetings.Include(x => x.Participants).SingleOrDefaultAsync(x => x.Id == command.Id);
 
             if (meeting is null)
             {
                 throw new MeetingNotFoundException();
             }
 
-            var isUserEnrolled = user.EnrolledMeetings.SingleOrDefault(x => x.UserId == command.UserId);
+            var isUserEnrolled = meeting.Participants.SingleOrDefault(x => x.UserId == command.UserId);
 
             // TODO: return error???
-            if (isUserEnrolled != null)
+            if (isUserEnrolled != null || meeting.MeetingOrganizerId == command.UserId)
             {
-                return Unit.Value;
-                //throw new UserAlreadyBelongsToTheMeetingException();
+                // return Unit.Value;
+                throw new UserAlreadyBelongsToTheMeetingException();
             }
 
             if (meeting.ParticipantCount == meeting.MaxParticipants)
             {
-                //throw new MeetingHasNotFreeSlotsException();
-                return Unit.Value;
+                throw new MeetingHasNotFreeSlotsException();
+                // return Unit.Value;
             }
 
             meeting.AddParticipantToCounter();
@@ -56,6 +55,8 @@ namespace BT.Application.Features.MeetingFeatures.Commands.JoinMeeting
 
             await _dataContext.UserMeeting.AddAsync(userMeeting);
             await _dataContext.SaveChangesAsync();
+
+            
 
             return Unit.Value;
         }

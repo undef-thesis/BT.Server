@@ -29,9 +29,8 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetFilteredMeetings
                 .Where(x => x.CategoryId == query.CategoryId ||
                         x.Address.City.ToLower() == query.City.ToLower() ||
                         x.Address.Country.ToLower() == query.Country.ToLower())
-                        .Take(4)
                         .ToListAsync();
-                        
+
             var mapped = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingDto>>(meetings);
 
             return mapped;

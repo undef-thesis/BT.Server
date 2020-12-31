@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BT.Api.Controllers
 {
     [ApiVersion("1.0")]
-    public class HomeController : Controller
+    public class HomeController : ApiBaseController
     {
         public HomeController()
         {

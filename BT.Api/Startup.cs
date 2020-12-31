@@ -41,7 +41,7 @@ namespace BT.Api
             services.AddScoped<IDataContext, DataContext>();
 
             services.AddDbContext<DataContext>();
-            // services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
+            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
             services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
             services.AddSingleton(AutoMapperConfig.Initialize());
@@ -63,7 +63,9 @@ namespace BT.Api
                     .WithOrigins("http://localhost:4200", "http://192.168.137.1:8080",
                         "https://bt.aleksanderszatko.com",
                         "https://www.bt.aleksanderszatko.com",
-                        "www.bt.aleksanderszatko.com");
+                        "www.bt.aleksanderszatko.com",
+                        "http://localhost:9876"
+                    );
             }));
 
             services.SetupValidators();
@@ -85,7 +87,7 @@ namespace BT.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("CorsPolicy");

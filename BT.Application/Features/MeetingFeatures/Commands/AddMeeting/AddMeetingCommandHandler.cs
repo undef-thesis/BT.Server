@@ -42,14 +42,15 @@ namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
                 throw new CategoryNotFoundException();
             }
 
-            var meeting = new Meeting(command.Name, command.Description, command.MaxParticipants, 
+            var meeting = new Meeting(command.Name, command.Description, command.MaxParticipants,
                 command.Date, user.Id, category.Id);
+            meeting.AddParticipantToCounter();
 
             double lat = Convert.ToDouble(command.Latitude, new CultureInfo("en-US"));
             double lng = Convert.ToDouble(command.Longitude, new CultureInfo("en-US"));
 
             var address = new Address(lat, lng, command.Range, command.Country,
-                command.PostalCode, command.Province, command.City, command.Street, meeting.Id);
+                command.Province, command.PostalCode, command.City, command.Street, meeting.Id);
 
             await _dataContext.Meetings.AddAsync(meeting);
             await _dataContext.Address.AddAsync(address);
