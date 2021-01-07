@@ -4,6 +4,7 @@ using BT.Application.Features.MeetingFeatures.Commands.AddMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.AddMeetingImage;
 using BT.Application.Features.MeetingFeatures.Commands.DeleteMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.JoinMeeting;
+using BT.Application.Features.MeetingFeatures.Commands.QuitMeeting;
 using BT.Application.Features.MeetingFeatures.Commands.UpdateMeeting;
 using BT.Application.Features.MeetingFeatures.Queries.GetEnrolledMeetings;
 using BT.Application.Features.MeetingFeatures.Queries.GetFilteredMeetings;
@@ -151,6 +152,21 @@ namespace BT.Api.Controllers
         }
 
         /// <summary>
+        /// Quit to meeting
+        /// </summary>
+        /// <param name="command">QuitMeetingCommand</param> 
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("quit/{id}")]
+        [Authorize]
+        public async Task<IActionResult> Quit(Guid id)
+        {
+            await Execute(new QuitMeetingCommand { Id = id});
+
+            return NoContent();
+        }
+
+        /// <summary>
         /// Add images to meeting
         /// <param name="command">AddMeetingImageCommand</param> 
         /// </summary>
@@ -169,10 +185,10 @@ namespace BT.Api.Controllers
         /// </summary>
         /// <param name="id">Meeting id</param> 
         /// <returns></returns>
-        [HttpPut]
+        [HttpPatch]
         [Route("{id}")]
         [Authorize]
-        public async Task<IActionResult> Update([FromBody] UpdateMeetingCommand command, Guid id)
+        public async Task<IActionResult> Update([FromForm] UpdateMeetingCommand command, Guid id)
         {
             command.Id = id;
             await Execute(command);

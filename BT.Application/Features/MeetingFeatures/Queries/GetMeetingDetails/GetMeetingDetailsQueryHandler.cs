@@ -26,7 +26,7 @@ namespace BT.Application.Features.MeetingFeatures.Queries.GetMeetingDetails
             var meetingDetails = await _dataContext.Meetings
                 .Include(x => x.Address).Include(x => x.Comments)
                 .Include(x => x.Category).Include(x => x.Images)
-                .Include(x => x.MeetingOrganizer)
+                .Include(x => x.MeetingOrganizer).Include(x => x.Participants)
                 .SingleOrDefaultAsync(x => x.Id == query.Id);
 
             if (meetingDetails is null)

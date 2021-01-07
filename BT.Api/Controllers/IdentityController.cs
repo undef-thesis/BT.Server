@@ -13,7 +13,7 @@ namespace BT.Api.Controllers
     public class IdentityController : ApiBaseController
     {
         private readonly IAuthTokenCache _authTokensCache;
-        
+
         public IdentityController(IAuthTokenCache authTokensCache)
         {
             _authTokensCache = authTokensCache;
@@ -27,7 +27,7 @@ namespace BT.Api.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody]RegisterCommand command)
+        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
         {
             await Execute(command);
 
@@ -42,7 +42,7 @@ namespace BT.Api.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody]LoginCommand command)
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
             var token = await Execute(command);
 
@@ -57,7 +57,7 @@ namespace BT.Api.Controllers
         [HttpPost]
         [Route("refresh-token")]
         [AllowAnonymous]
-        public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenCommand command)
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
         {
             var token = await Execute(command);
 
@@ -72,7 +72,7 @@ namespace BT.Api.Controllers
         [HttpPost]
         [Route("revoke-token")]
         [Authorize]
-        public async Task<IActionResult> RevokeToken([FromBody]RevokeTokenCommand command)
+        public async Task<IActionResult> RevokeToken([FromBody] RevokeTokenCommand command)
         {
             await Execute(command);
 

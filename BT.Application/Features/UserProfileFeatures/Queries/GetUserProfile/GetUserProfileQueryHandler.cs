@@ -22,6 +22,7 @@ namespace BT.Application.Features.UserProfileFeatures.Queries.GetUserProfile
 
             var userProfleDto = new UserPofileDto
             {
+                Id = user.Id,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
                 Avatar = user.Avatar?.Picture ?? null

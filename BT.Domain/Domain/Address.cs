@@ -49,6 +49,7 @@ namespace BT.Domain.Domain
             City = city;
             Street = street;
             PostalCode = postalCode;
+            
             UpdatedAt = DateTime.UtcNow;
         }
     }

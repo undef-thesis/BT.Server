@@ -28,7 +28,7 @@ namespace BT.Application.Features.MeetingFeatures.Queries.SearchMeetings
  
             var meetings = await _dataContext.Meetings
                 .Include(x => x.Address).Include(x => x.Category).Include(x => x.Images)
-                .Where(x => x.Address.City == query.City && x.Address.Country == query.Country)
+                .Where(x => x.Address.City == query.City || x.Address.Country == query.Country)
                 .ToListAsync();
 
             var searchedMeetings = new List<Meeting>();

@@ -25,11 +25,13 @@ namespace BT.Api
     {
         public IConfiguration Configuration { get; }
         public static IConfiguration StaticConfiguration { get; private set; }
+        public IWebHostEnvironment CurrentEnvironment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
             StaticConfiguration = configuration;
+            CurrentEnvironment = currentEnvironment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -40,8 +42,17 @@ namespace BT.Api
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IDataContext, DataContext>();
 
-            services.AddDbContext<DataContext>();
-            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
+            if (CurrentEnvironment.IsEnvironment("Testing"))
+            {
+                services.AddDbContext<DataContext>(options =>
+                    options.UseInMemoryDatabase("BT_DB_IN_MEMORY"));
+            }
+            else
+            {
+                services.AddDbContext<DataContext>();
+            }
+
+            // services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("BT_DB"));
             services.AddMediatR(AppDomain.CurrentDomain.Load("BT.Application"));
 
             services.AddSingleton(AutoMapperConfig.Initialize());

@@ -22,7 +22,7 @@ namespace BT.Domain.Domain
         public Category Category { get; private set; }
         public ICollection<MeetingImage> Images { get; private set; }
 
-        protected Meeting() {}
+        protected Meeting() { }
 
         public Meeting(string name, string description, int maxParticipants, DateTime date, Guid meetingOrganizerId, Guid categoryId)
         {
@@ -38,18 +38,25 @@ namespace BT.Domain.Domain
             CategoryId = categoryId;
         }
 
-        public void UpdateMeeting(string name, string description, int maxParticipants, DateTime date)
+        public void UpdateMeeting(string name, string description, int maxParticipants, DateTime date, Guid categoryId)
         {
             Name = name;
-            Description = description; 
+            Description = description;
             MaxParticipants = maxParticipants;
             Date = date;
+            CategoryId = categoryId;
+
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddParticipantToCounter() 
+        public void AddParticipantToCounter()
         {
             ParticipantCount++;
+        }
+
+        public void RemoveParticipantFromCounter()
+        {
+            ParticipantCount--;
         }
     }
 }

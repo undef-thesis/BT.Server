@@ -52,8 +52,11 @@ namespace BT.Application.Features.MeetingFeatures.Commands.AddMeeting
             var address = new Address(lat, lng, command.Range, command.Country,
                 command.Province, command.PostalCode, command.City, command.Street, meeting.Id);
 
+            var userMeeting = new UserMeeting(user.Id, user, meeting.Id, meeting);
+
             await _dataContext.Meetings.AddAsync(meeting);
             await _dataContext.Address.AddAsync(address);
+            await _dataContext.UserMeeting.AddAsync(userMeeting);
 
             var convertedImages = _imageService.ConvertImageToByte(command.Images);
 

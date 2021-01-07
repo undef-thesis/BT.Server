@@ -9,14 +9,14 @@ using BT.Application.DTO;
 
 namespace BT.Application.Features.AuthFeatures.Commands.Login
 {
-    public class LoginCommandHandler: IRequestHandler<LoginCommand, AuthDto>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthDto>
     {
         private readonly IAuthTokenService _authTokensService;
         private readonly IPasswordService _passwordService;
-        private readonly IAuthTokenCache _cache;        
+        private readonly IAuthTokenCache _cache;
         private readonly IDataContext _dataContext;
 
-        public LoginCommandHandler(IAuthTokenService authTokensService, IPasswordService passwordService, 
+        public LoginCommandHandler(IAuthTokenService authTokensService, IPasswordService passwordService,
             IAuthTokenCache cache, IDataContext dataContext)
         {
             _authTokensService = authTokensService;
@@ -29,21 +29,21 @@ namespace BT.Application.Features.AuthFeatures.Commands.Login
         {
             var user = await _dataContext.Users.SingleOrDefaultAsync(x => x.Email == command.Email);
 
-            if(user is null)
+            if (user is null)
             {
                 throw new UserNotFoundException(command.Email);
             }
 
             var passwordHash = _passwordService.HashPassword(command.Password, user.Salt);
 
-            if(passwordHash != user.Password)
+            if (passwordHash != user.Password)
             {
                 throw new InvalidPasswordException();
             }
 
             var isRefreshTokenExists = await _dataContext.RefreshToken.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            
-            if(isRefreshTokenExists != null)
+
+            if (isRefreshTokenExists != null)
             {
                 _dataContext.RefreshToken.Remove(isRefreshTokenExists);
             }
