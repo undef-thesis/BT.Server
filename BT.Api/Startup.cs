@@ -75,7 +75,8 @@ namespace BT.Api
                         "https://bt.aleksanderszatko.com",
                         "https://www.bt.aleksanderszatko.com",
                         "www.bt.aleksanderszatko.com",
-                        "http://localhost:9876"
+                        "http://localhost:9876",
+                        "https://aleksanderszatko.com"
                     );
             }));
 
